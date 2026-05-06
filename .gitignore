@@ -1,0 +1,12 @@
+projects/HIPIE/bert-base-uncased/pytorch_model.bin
+.DS_Store
+*.tar.gz
+*.bin
+*.so
+*.o
+*.pyc
+__pycache__/
+.venv/
+nlp/.venv/
+*/build/
+*.sqlite3

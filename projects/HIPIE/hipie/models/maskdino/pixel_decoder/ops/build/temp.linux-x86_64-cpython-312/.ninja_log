@@ -1,0 +1,4 @@
+# ninja log v7
+0	14854	1777317115023738654	/kaggle/working/HIPIE/projects/HIPIE/hipie/models/maskdino/pixel_decoder/ops/build/temp.linux-x86_64-cpython-312/kaggle/working/HIPIE/projects/HIPIE/hipie/models/maskdino/pixel_decoder/ops/src/cpu/ms_deform_attn_cpu.o	69572e758ebf50ee
+1	34824	1777317115024738740	/kaggle/working/HIPIE/projects/HIPIE/hipie/models/maskdino/pixel_decoder/ops/build/temp.linux-x86_64-cpython-312/kaggle/working/HIPIE/projects/HIPIE/hipie/models/maskdino/pixel_decoder/ops/src/cuda/ms_deform_attn_cuda.o	5183973aabab2bcf
+1	35488	1777317115024738740	/kaggle/working/HIPIE/projects/HIPIE/hipie/models/maskdino/pixel_decoder/ops/build/temp.linux-x86_64-cpython-312/kaggle/working/HIPIE/projects/HIPIE/hipie/models/maskdino/pixel_decoder/ops/src/vision.o	653184e827aad718

@@ -1,0 +1,4 @@
+# ninja log v7
+1	13924	1777317071697016813	/kaggle/working/HIPIE/projects/HIPIE/hipie/models/deformable_detr/ops/build/temp.linux-x86_64-cpython-312/kaggle/working/HIPIE/projects/HIPIE/hipie/models/deformable_detr/ops/src/cpu/ms_deform_attn_cpu.o	ebc2f1d583acfa85
+1	34926	1777317071697016813	/kaggle/working/HIPIE/projects/HIPIE/hipie/models/deformable_detr/ops/build/temp.linux-x86_64-cpython-312/kaggle/working/HIPIE/projects/HIPIE/hipie/models/deformable_detr/ops/src/cuda/ms_deform_attn_cuda.o	1b570245a2e02b0a
+1	37124	1777317071697016813	/kaggle/working/HIPIE/projects/HIPIE/hipie/models/deformable_detr/ops/build/temp.linux-x86_64-cpython-312/kaggle/working/HIPIE/projects/HIPIE/hipie/models/deformable_detr/ops/src/vision.o	35fa16993b66f82e
