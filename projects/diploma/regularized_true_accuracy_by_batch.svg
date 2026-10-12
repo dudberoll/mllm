@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650">
+  <rect width="100%" height="100%" fill="white"/>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #222; }
+    .title { font-size: 26px; font-weight: 400; }
+    .label { font-size: 21px; }
+    .tick { font-size: 18px; }
+    .grid { stroke: #b8b8b8; stroke-width: 1.7; opacity: 0.65; }
+    .axis { stroke: #555; stroke-width: 2.2; }
+    .series { fill: none; stroke: blue; stroke-width: 3.2; }
+    .marker { fill: blue; stroke: blue; }
+  </style>
+  <text class="title" x="450" y="38" text-anchor="middle">Performance Evolution</text>
+  <line class="grid" x1="95.00" y1="70" x2="95.00" y2="565"/>
+  <line class="grid" x1="245.00" y1="70" x2="245.00" y2="565"/>
+  <line class="grid" x1="395.00" y1="70" x2="395.00" y2="565"/>
+  <line class="grid" x1="545.00" y1="70" x2="545.00" y2="565"/>
+  <line class="grid" x1="695.00" y1="70" x2="695.00" y2="565"/>
+  <line class="grid" x1="845.00" y1="70" x2="845.00" y2="565"/>
+  <line class="grid" x1="95" y1="565.00" x2="845" y2="565.00"/>
+  <line class="grid" x1="95" y1="506.07" x2="845" y2="506.07"/>
+  <line class="grid" x1="95" y1="447.14" x2="845" y2="447.14"/>
+  <line class="grid" x1="95" y1="388.21" x2="845" y2="388.21"/>
+  <line class="grid" x1="95" y1="329.29" x2="845" y2="329.29"/>
+  <line class="grid" x1="95" y1="270.36" x2="845" y2="270.36"/>
+  <line class="grid" x1="95" y1="211.43" x2="845" y2="211.43"/>
+  <line class="grid" x1="95" y1="152.50" x2="845" y2="152.50"/>
+  <line class="grid" x1="95" y1="93.57" x2="845" y2="93.57"/>
+  <rect x="95" y="70" width="750" height="495" fill="none" class="axis"/>
+  <text class="tick" x="95.00" y="597" text-anchor="middle">0</text>
+  <text class="tick" x="245.00" y="597" text-anchor="middle">10</text>
+  <text class="tick" x="395.00" y="597" text-anchor="middle">20</text>
+  <text class="tick" x="545.00" y="597" text-anchor="middle">30</text>
+  <text class="tick" x="695.00" y="597" text-anchor="middle">40</text>
+  <text class="tick" x="845.00" y="597" text-anchor="middle">50</text>
+  <text class="tick" x="79" y="571.00" text-anchor="end">0.00</text>
+  <text class="tick" x="79" y="512.07" text-anchor="end">0.05</text>
+  <text class="tick" x="79" y="453.14" text-anchor="end">0.10</text>
+  <text class="tick" x="79" y="394.21" text-anchor="end">0.15</text>
+  <text class="tick" x="79" y="335.29" text-anchor="end">0.20</text>
+  <text class="tick" x="79" y="276.36" text-anchor="end">0.25</text>
+  <text class="tick" x="79" y="217.43" text-anchor="end">0.30</text>
+  <text class="tick" x="79" y="158.50" text-anchor="end">0.35</text>
+  <text class="tick" x="79" y="99.57" text-anchor="end">0.40</text>
+  <text class="label" x="450" y="628" text-anchor="middle">Step batch</text>
+  <text class="label" x="25" y="317.5" text-anchor="middle" transform="rotate(-90 25 317.5)">Accuracy</text>
+  <polyline class="series" points="95.00,518.96 110.00,325.60 125.00,362.43 140.00,325.60 155.00,297.98 170.00,169.07 185.00,159.87 200.00,123.04 215.00,187.49 230.00,141.45 245.00,150.66 260.00,215.11 275.00,344.02 290.00,408.47 305.00,491.34 320.00,472.92 335.00,500.55 350.00,325.60 365.00,399.26 380.00,251.94 395.00,132.24 410.00,104.62 425.00,123.04 440.00,288.77 455.00,325.60 470.00,362.43 485.00,371.64 500.00,362.43 515.00,316.39 530.00,399.26 545.00,307.19 560.00,297.98 575.00,307.19 590.00,279.56 605.00,242.73 620.00,215.11 635.00,261.15 650.00,205.90 665.00,233.53 680.00,159.87 695.00,224.32 710.00,325.60 725.00,242.73 740.00,270.36 755.00,380.85 770.00,279.56 785.00,270.36 800.00,316.39 815.00,316.39 830.00,371.64"/>
+  <rect class="marker" x="89.70" y="513.66" width="10.6" height="10.6"/>
+  <rect class="marker" x="104.70" y="320.30" width="10.6" height="10.6"/>
+  <rect class="marker" x="119.70" y="357.13" width="10.6" height="10.6"/>
+  <rect class="marker" x="134.70" y="320.30" width="10.6" height="10.6"/>
+  <rect class="marker" x="149.70" y="292.68" width="10.6" height="10.6"/>
+  <rect class="marker" x="164.70" y="163.77" width="10.6" height="10.6"/>
+  <rect class="marker" x="179.70" y="154.57" width="10.6" height="10.6"/>
+  <rect class="marker" x="194.70" y="117.74" width="10.6" height="10.6"/>
+  <rect class="marker" x="209.70" y="182.19" width="10.6" height="10.6"/>
+  <rect class="marker" x="224.70" y="136.15" width="10.6" height="10.6"/>
+  <rect class="marker" x="239.70" y="145.36" width="10.6" height="10.6"/>
+  <rect class="marker" x="254.70" y="209.81" width="10.6" height="10.6"/>
+  <rect class="marker" x="269.70" y="338.72" width="10.6" height="10.6"/>
+  <rect class="marker" x="284.70" y="403.17" width="10.6" height="10.6"/>
+  <rect class="marker" x="299.70" y="486.04" width="10.6" height="10.6"/>
+  <rect class="marker" x="314.70" y="467.62" width="10.6" height="10.6"/>
+  <rect class="marker" x="329.70" y="495.25" width="10.6" height="10.6"/>
+  <rect class="marker" x="344.70" y="320.30" width="10.6" height="10.6"/>
+  <rect class="marker" x="359.70" y="393.96" width="10.6" height="10.6"/>
+  <rect class="marker" x="374.70" y="246.64" width="10.6" height="10.6"/>
+  <rect class="marker" x="389.70" y="126.94" width="10.6" height="10.6"/>
+  <rect class="marker" x="404.70" y="99.32" width="10.6" height="10.6"/>
+  <rect class="marker" x="419.70" y="117.74" width="10.6" height="10.6"/>
+  <rect class="marker" x="434.70" y="283.47" width="10.6" height="10.6"/>
+  <rect class="marker" x="449.70" y="320.30" width="10.6" height="10.6"/>
+  <rect class="marker" x="464.70" y="357.13" width="10.6" height="10.6"/>
+  <rect class="marker" x="479.70" y="366.34" width="10.6" height="10.6"/>
+  <rect class="marker" x="494.70" y="357.13" width="10.6" height="10.6"/>
+  <rect class="marker" x="509.70" y="311.09" width="10.6" height="10.6"/>
+  <rect class="marker" x="524.70" y="393.96" width="10.6" height="10.6"/>
+  <rect class="marker" x="539.70" y="301.89" width="10.6" height="10.6"/>
+  <rect class="marker" x="554.70" y="292.68" width="10.6" height="10.6"/>
+  <rect class="marker" x="569.70" y="301.89" width="10.6" height="10.6"/>
+  <rect class="marker" x="584.70" y="274.26" width="10.6" height="10.6"/>
+  <rect class="marker" x="599.70" y="237.43" width="10.6" height="10.6"/>
+  <rect class="marker" x="614.70" y="209.81" width="10.6" height="10.6"/>
+  <rect class="marker" x="629.70" y="255.85" width="10.6" height="10.6"/>
+  <rect class="marker" x="644.70" y="200.60" width="10.6" height="10.6"/>
+  <rect class="marker" x="659.70" y="228.23" width="10.6" height="10.6"/>
+  <rect class="marker" x="674.70" y="154.57" width="10.6" height="10.6"/>
+  <rect class="marker" x="689.70" y="219.02" width="10.6" height="10.6"/>
+  <rect class="marker" x="704.70" y="320.30" width="10.6" height="10.6"/>
+  <rect class="marker" x="719.70" y="237.43" width="10.6" height="10.6"/>
+  <rect class="marker" x="734.70" y="265.06" width="10.6" height="10.6"/>
+  <rect class="marker" x="749.70" y="375.55" width="10.6" height="10.6"/>
+  <rect class="marker" x="764.70" y="274.26" width="10.6" height="10.6"/>
+  <rect class="marker" x="779.70" y="265.06" width="10.6" height="10.6"/>
+  <rect class="marker" x="794.70" y="311.09" width="10.6" height="10.6"/>
+  <rect class="marker" x="809.70" y="311.09" width="10.6" height="10.6"/>
+  <rect class="marker" x="824.70" y="366.34" width="10.6" height="10.6"/>
+  <rect x="670" y="88" width="170" height="54" rx="4" fill="white" stroke="#dddddd" stroke-width="1.5" opacity="0.96"/>
+  <line x1="694" y1="115" x2="742" y2="115" stroke="blue" stroke-width="3.2"/>
+  <rect x="713" y="109" width="12" height="12" fill="blue"/>
+  <text class="label" x="758" y="122">Accuracy</text>
+</svg>

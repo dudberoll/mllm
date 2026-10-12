@@ -1,0 +1,3 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512
+tinker_cookbook.checkpoint_utils:197 [INFO] No checkpoints found at /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:228 [INFO] No checkpoints found with key state_path in /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512

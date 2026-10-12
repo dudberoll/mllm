@@ -1,0 +1,84 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /Users/dudberoll/prj/diploma/test_runs/load_ckpt_smoke_20260514
+tinker_cookbook.checkpoint_utils:197 [INFO] No checkpoints found at /Users/dudberoll/prj/diploma/test_runs/load_ckpt_smoke_20260514/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:228 [INFO] No checkpoints found with key state_path in /Users/dudberoll/prj/diploma/test_runs/load_ckpt_smoke_20260514
+tinker.lib.internal_client_holder:289 [WARNING] Your Tinker SDK version is outdated. Please upgrade to the latest version.
+tinker.lib.public_interfaces.service_client:67 [INFO] ServiceClient initialized for session 7825283e-1283-570d-9194-b8a790ba3bbf
+tinker.lib.public_interfaces.service_client:151 [INFO] TrainingClient initialized for model 7825283e-1283-570d-9194-b8a790ba3bbf:train:0
+tinker.lib.telemetry:204 [INFO] Exception logged for session ID: 7825283e-1283-570d-9194-b8a790ba3bbf
+tinker.lib.telemetry:204 [INFO] Exception logged for session ID: 7825283e-1283-570d-9194-b8a790ba3bbf
+tinker_cookbook.checkpoint_utils:76 [WARNING] Could not fetch renderer metadata for checkpoint tinker://4a1939e6-04be-5a77-9e4e-910ccff9f27e:train:0/weights/final: Error code: 404 - {'detail': 'Model not found.'}
+tinker_cookbook.checkpoint_utils:33 [INFO] Checkpoint tinker://4a1939e6-04be-5a77-9e4e-910ccff9f27e:train:0/weights/final has no renderer metadata.
+tinker_cookbook.distillation.train_on_policy:735 [INFO] Loaded state from tinker://4a1939e6-04be-5a77-9e4e-910ccff9f27e:train:0/weights/final
+tinker_cookbook.distillation.train_on_policy:766 [INFO] Created teacher sampling client for Qwen/Qwen3-32B (checkpoint: None)
+tinker_cookbook.distillation.train_on_policy:775 [INFO] Will train on 1 batches (dataset has 1)
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 2.47 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 16.73 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.04 seconds
+tinker_cookbook.distillation.train_on_policy:406 [INFO] User: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+Assistant: True might be "true quadrant first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first first second second first first second second second second second first first first second first second second second second second first second first second first first first second second second second second first second second second second first first first first second second second second second second second second second second first first first first second second second second second second second first first second second second second second second second second second first first second second second second second first second second second second second second second second first second second first second first first first second second second second second first second first second second second second second second second second first second first second first first second second first second first second second second second second second second second first first first first second second second second second second second second second first second first second second second second second first second second second second second second second
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 2.15 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 2.58 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.01 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://7825283e-1283-570d-9194-b8a790ba3bbf:train:0/weights/000001', 'sampler_path': 'tinker://7825283e-1283-570d-9194-b8a790ba3bbf:train:0/sampler_weights/000001'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 6.32 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/test_runs/load_ckpt_smoke_20260514/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+                    Step 0                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Metric                         ┃ Value      ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ env/all/ac_tokens_per_turn     │ 512.000000 │
+│ env/all/by_group/frac_all_bad  │ 1.000000   │
+│ env/all/by_group/frac_all_good │ 0.000000   │
+│ env/all/by_group/frac_mixed    │ 0.000000   │
+│ env/all/correct                │ 0.000000   │
+│ env/all/format                 │ 0.000000   │
+│ env/all/ob_tokens_per_turn     │ 80.000000  │
+│ env/all/reward/total           │ -0.100000  │
+│ env/all/total_ac_tokens        │ 512        │
+│ env/all/total_episodes         │ 1          │
+│ env/all/total_ob_tokens        │ 80         │
+│ env/all/total_turns            │ 1          │
+│ env/all/turns_per_episode      │ 1.000000   │
+│ optim/entropy                  │ 0.307801   │
+│ optim/fractal_dissonance       │ 0.000613   │
+│ optim/h_student                │ 0.621145   │
+│ optim/h_teacher                │ 0.621758   │
+│ optim/hurst_n_active_mean      │ 512.000000 │
+│ optim/hurst_num_windows_mean   │ 10.000000  │
+│ optim/hurst_weight_active_frac │ 0.000000   │
+│ optim/hurst_weight_enabled     │ 0.000000   │
+│ optim/hurst_weight_mean        │ 1.000000   │
+│ optim/hurst_weight_median      │ 1.000000   │
+│ optim/hurst_weight_signal_mad  │ 1.000000   │
+│ optim/hurst_weight_signal_med… │ 0.000000   │
+│ optim/hurst_weight_std         │ 0.000000   │
+│ optim/kl_sample_train_v1       │ -0.000532  │
+│ optim/kl_sample_train_v2       │ 0.000742   │
+│ optim/lr                       │ 0.000100   │
+│ optim/std_s_mean               │ 0.162408   │
+│ optim/std_s_median             │ 0.162408   │
+│ optim/std_t_mean               │ 0.176047   │
+│ optim/std_t_median             │ 0.176047   │
+│ progress/batch                 │ 0          │
+│ progress/done_frac             │ 1.000000   │
+│ teacher_kl                     │ 0.086497   │
+│ teacher_kl/dataset_0           │ 0.086497   │
+│ time/assemble_training_data    │ 0.040623   │
+│ time/compute_kl_penalty        │ 2.149317   │
+│ time/compute_kl_sample_train   │ 0.006842   │
+│ time/sample                    │ 16.732334  │
+│ time/save_checkpoint           │ 6.316989   │
+│ time/total                     │ 27.869148  │
+│ time/train                     │ 2.581910   │
+└────────────────────────────────┴────────────┘
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://7825283e-1283-570d-9194-b8a790ba3bbf:train:0/weights/final', 'sampler_path': 'tinker://7825283e-1283-570d-9194-b8a790ba3bbf:train:0/sampler_weights/final'}
+tinker_cookbook.distillation.train_on_policy:806 [INFO] Training completed successfully

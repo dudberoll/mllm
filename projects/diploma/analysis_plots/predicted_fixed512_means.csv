@@ -1,0 +1,5 @@
+experiment,predicted_mean_correct
+KL-only,0.3
+std_t полный,0.23
+std_t adaptive,0.27
+GZ-H,0.25

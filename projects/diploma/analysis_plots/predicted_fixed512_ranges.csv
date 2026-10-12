@@ -1,0 +1,5 @@
+experiment,min_correct,max_correct,midpoint,half_range
+KL-only,0.25,0.35,0.3,0.04999999999999999
+std_t полный,0.18,0.28,0.23,0.05000000000000002
+std_t adaptive,0.22,0.32,0.27,0.05
+GZ-H,0.2,0.3,0.25,0.04999999999999999

@@ -1,0 +1,149 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /Users/dudberoll/prj/diploma/test_runs/stdt_demo_20260514
+tinker_cookbook.checkpoint_utils:197 [INFO] No checkpoints found at /Users/dudberoll/prj/diploma/test_runs/stdt_demo_20260514/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:228 [INFO] No checkpoints found with key state_path in /Users/dudberoll/prj/diploma/test_runs/stdt_demo_20260514
+tinker.lib.internal_client_holder:289 [WARNING] Your Tinker SDK version is outdated. Please upgrade to the latest version.
+tinker.lib.public_interfaces.service_client:67 [INFO] ServiceClient initialized for session 13f8b9ce-686b-5b44-aec0-548060dd8e07
+tinker.lib.public_interfaces.service_client:151 [INFO] TrainingClient initialized for model 13f8b9ce-686b-5b44-aec0-548060dd8e07:train:0
+tinker_cookbook.distillation.train_on_policy:766 [INFO] Created teacher sampling client for Qwen/Qwen3-32B (checkpoint: None)
+tinker_cookbook.distillation.train_on_policy:775 [INFO] Will train on 1 batches (dataset has 1)
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 5.11 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 27.91 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.05 seconds
+tinker_cookbook.distillation.train_on_policy:406 [INFO] [33mUser: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+[0m[33m
+[0m[33mAssistant:[0m[32m To evaluate the contour integral \(\frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz\) over the square with vertices \(\pm2\) and \(\pm2+4i\), we will use Cauchy's integral formula. According to Cauchy's integral formula, for a function \(f(z)\) that is analytic inside and on a simple closed contour \(C\), and for a point \(a\) inside \(C\), the following holds:
+[0m[32m
+[0m[32m\[
+[0m[32m\frac{1}{2\pi i} \oint_C \frac{f(z)}{z-a}dz = f(a)
+[0m[32m\]
+[0m[32m
+[0m[32mIn this problem, our function is \(f(z) = \frac{z^2}{z^2+4}\), and we need to consider the poles of \(f(z)\). The poles occur where the denominator is zero, i.e., \(z^2 + 4 = 0\). So, the solutions to \(z^2 = -4\) are \(z = 2i\) and \(z = -2i\).
+[0m[32m
+[0m[32mWe need to determine if both poles are inside the contour \(C\). The vertices of the square are \(\pm2\) and \(\pm2+4i\). Thus, the contour \(C\) is a square with a side length of 4 centered at the origin in the complex plane. Both \(2i\) and \(-2i\) are inside this square, so we can use Cauchy's integral formula for each pole.
+[0m[32m
+[0m[32mTo apply Cauchy's integral formula, we need to find the residue of \(f(z)\) at each pole. For a simple pole at \(z = a\), the residue of \(f(z)\) is given by:
+[0m[32m
+[0m[32m\[
+[0m[32m\res(f, a) = \lim_{z \to a} (z-a)f(z)
+[0m[32m\]
+[0m[32m
+[0m[32mLet's compute the residues at \(z = 2i\) and \(z = -2i\).
+[0m[32m
+[0m[32mAt \(z = 2i\):
+[0m[32m
+[0m[32m\[
+[0m[32m\res(f, 2i) = \lim_{z \to 2i} (z-2i)\frac{z^2}{z^2+4}
+[0m[32m\]
+[0m[32m
+[0m[32mSince \(z^2 + 4 = (z-2i)(z+2i)\), we have:
+[0m[32m
+[0m[32m\[
+[0m[32m\res(f, 2i) = \lim_{z \to 2i} \frac{z^2}{z+2i} = \frac{(2i)^2}{2i+2i} = \frac{-4}{4i} = -\frac{1}{i} = i
+[0m[32m\]
+[0m[32m
+[0m[32mAt \(z = -2i\):
+[0m[32m
+[0m[32m\[
+[0m[32m\res(f, -2i) = \lim_{z \to -2i} (z+2i)\frac{z^2}{z^2+4}
+[0m[32m\]
+[0m[32m
+[0m[32mSince \(z^2 + 4 = (z-2i)(z+2i)\), we have:
+[0m[32m
+[0m[32m\[
+[0m[32m\res(f, -2i) = \lim_{z \to -2i} \frac{z^2}{z-2i} = \frac{(-2i)^2}{-2i-2i} = \frac{-4}{-4i} = \frac{1}{i} = -i
+[0m[32m\]
+[0m[32m
+[0m[32mThe sum of the residues is \(i - i = 0\). Therefore, by Cauchy's residue theorem, the contour integral is:
+[0m[32m
+[0m[32m\[
+[0m[32m\frac{1}{2\pi i} \oint_C \frac{z^2}{z^2+4}dz = 2\pi i \cdot 0 = 0
+[0m[32m\]
+[0m[32m
+[0m[32mThus, the answer is \(\boxed{0}\). Let's confirm this by implementing it in Python using sympy.
+[0m[32m
+[0m[32m```python
+[0m[32mimport sympy as sp
+[0m[32m
+[0m[32m# Define the complex variable
+[0m[32mz = sp.symbols('z')
+[0m[32m
+[0m[32m# Define the function
+[0m[32mf = z**2 / (z**2 + 4)
+[0m[32m
+[0m[32m# Find the residues at the poles
+[0m[32mresidue_at_2i = sp.limit((z - 2*sp.I) * f, z, 2*sp.I)
+[0m[32mresidue_at_neg_2i = sp.limit((z + 2*sp.I) * f, z, -2*sp.I)
+[0m[32m
+[0m[32m# Sum of the residues
+[0m[32mtotal_residue = residue_at_2i + residue_at_neg_2i
+[0m[32m
+[0m[32m# The contour integral is 2*pi*i * total_residue / (2*pi*i)
+[0m[32mcontour_integral = total_residue
+[0m[32m
+[0m[32mprint(contour_integral)
+[0m[32m```<|endoftext|>[0m
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 2.11 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 33.15 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.03 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://13f8b9ce-686b-5b44-aec0-548060dd8e07:train:0/weights/000001', 'sampler_path': 'tinker://13f8b9ce-686b-5b44-aec0-548060dd8e07:train:0/sampler_weights/000001'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 7.45 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/test_runs/stdt_demo_20260514/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+[3m                    Step 0                     [0m
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃[1;35m [0m[1;35mMetric                        [0m[1;35m [0m┃[1;35m [0m[1;35mValue     [0m[1;35m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│[36m [0m[36menv/all/ac_tokens_per_turn    [0m[36m [0m│[32m [0m[32m809.333333[0m[32m [0m│
+│[36m [0m[36menv/all/by_group/frac_all_bad [0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36menv/all/by_group/frac_all_good[0m[36m [0m│[32m [0m[32m0.000000  [0m[32m [0m│
+│[36m [0m[36menv/all/by_group/frac_mixed   [0m[36m [0m│[32m [0m[32m0.000000  [0m[32m [0m│
+│[36m [0m[36menv/all/correct               [0m[36m [0m│[32m [0m[32m0.000000  [0m[32m [0m│
+│[36m [0m[36menv/all/format                [0m[36m [0m│[32m [0m[32m0.000000  [0m[32m [0m│
+│[36m [0m[36menv/all/ob_tokens_per_turn    [0m[36m [0m│[32m [0m[32m89.333333 [0m[32m [0m│
+│[36m [0m[36menv/all/reward/total          [0m[36m [0m│[32m [0m[32m-0.100000 [0m[32m [0m│
+│[36m [0m[36menv/all/total_ac_tokens       [0m[36m [0m│[32m [0m[32m2428      [0m[32m [0m│
+│[36m [0m[36menv/all/total_episodes        [0m[36m [0m│[32m [0m[32m3         [0m[32m [0m│
+│[36m [0m[36menv/all/total_ob_tokens       [0m[36m [0m│[32m [0m[32m268       [0m[32m [0m│
+│[36m [0m[36menv/all/total_turns           [0m[36m [0m│[32m [0m[32m3         [0m[32m [0m│
+│[36m [0m[36menv/all/turns_per_episode     [0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36moptim/entropy                 [0m[36m [0m│[32m [0m[32m0.235124  [0m[32m [0m│
+│[36m [0m[36moptim/fractal_dissonance      [0m[36m [0m│[32m [0m[32m0.035232  [0m[32m [0m│
+│[36m [0m[36moptim/h_student               [0m[36m [0m│[32m [0m[32m0.672984  [0m[32m [0m│
+│[36m [0m[36moptim/h_teacher               [0m[36m [0m│[32m [0m[32m0.658810  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_n_active_mean     [0m[36m [0m│[32m [0m[32m809.333333[0m[32m [0m│
+│[36m [0m[36moptim/hurst_num_windows_mean  [0m[36m [0m│[32m [0m[32m10.000000 [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_active_frac[0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_enabled    [0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_mean       [0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_median     [0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_signal_mad [0m[36m [0m│[32m [0m[32m0.031483  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_signal_med…[0m[36m [0m│[32m [0m[32m0.173333  [0m[32m [0m│
+│[36m [0m[36moptim/hurst_weight_std        [0m[36m [0m│[32m [0m[32m0.081650  [0m[32m [0m│
+│[36m [0m[36moptim/kl_sample_train_v1      [0m[36m [0m│[32m [0m[32m0.001147  [0m[32m [0m│
+│[36m [0m[36moptim/kl_sample_train_v2      [0m[36m [0m│[32m [0m[32m0.000765  [0m[32m [0m│
+│[36m [0m[36moptim/lr                      [0m[36m [0m│[32m [0m[32m0.000100  [0m[32m [0m│
+│[36m [0m[36moptim/std_s_mean              [0m[36m [0m│[32m [0m[32m0.127341  [0m[32m [0m│
+│[36m [0m[36moptim/std_s_median            [0m[36m [0m│[32m [0m[32m0.100788  [0m[32m [0m│
+│[36m [0m[36moptim/std_t_mean              [0m[36m [0m│[32m [0m[32m0.189074  [0m[32m [0m│
+│[36m [0m[36moptim/std_t_median            [0m[36m [0m│[32m [0m[32m0.173333  [0m[32m [0m│
+│[36m [0m[36mprogress/batch                [0m[36m [0m│[32m [0m[32m0         [0m[32m [0m│
+│[36m [0m[36mprogress/done_frac            [0m[36m [0m│[32m [0m[32m1.000000  [0m[32m [0m│
+│[36m [0m[36mteacher_kl                    [0m[36m [0m│[32m [0m[32m0.467262  [0m[32m [0m│
+│[36m [0m[36mteacher_kl/dataset_0          [0m[36m [0m│[32m [0m[32m0.467262  [0m[32m [0m│
+│[36m [0m[36mtime/assemble_training_data   [0m[36m [0m│[32m [0m[32m0.048664  [0m[32m [0m│
+│[36m [0m[36mtime/compute_kl_penalty       [0m[36m [0m│[32m [0m[32m2.111926  [0m[32m [0m│
+│[36m [0m[36mtime/compute_kl_sample_train  [0m[36m [0m│[32m [0m[32m0.031953  [0m[32m [0m│
+│[36m [0m[36mtime/sample                   [0m[36m [0m│[32m [0m[32m27.914851 [0m[32m [0m│
+│[36m [0m[36mtime/save_checkpoint          [0m[36m [0m│[32m [0m[32m7.445973  [0m[32m [0m│
+│[36m [0m[36mtime/total                    [0m[36m [0m│[32m [0m[32m70.754107 [0m[32m [0m│
+│[36m [0m[36mtime/train                    [0m[36m [0m│[32m [0m[32m33.156296 [0m[32m [0m│
+└────────────────────────────────┴────────────┘
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://13f8b9ce-686b-5b44-aec0-548060dd8e07:train:0/weights/final', 'sampler_path': 'tinker://13f8b9ce-686b-5b44-aec0-548060dd8e07:train:0/sampler_weights/final'}
+tinker_cookbook.distillation.train_on_policy:806 [INFO] Training completed successfully
