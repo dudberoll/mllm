@@ -1,0 +1,168 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /Users/dudberoll/prj/diploma/tinker-cookbook-reg2/test_runs/gzh_smoke_20260512
+tinker_cookbook.checkpoint_utils:197 [INFO] No checkpoints found at /Users/dudberoll/prj/diploma/tinker-cookbook-reg2/test_runs/gzh_smoke_20260512/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:228 [INFO] No checkpoints found with key state_path in /Users/dudberoll/prj/diploma/tinker-cookbook-reg2/test_runs/gzh_smoke_20260512
+tinker.lib.internal_client_holder:289 [WARNING] Your Tinker SDK version is outdated. Please upgrade to the latest version.
+tinker.lib.public_interfaces.service_client:67 [INFO] ServiceClient initialized for session 03d147ef-940e-56a6-a413-0fa67b141989
+tinker.lib.public_interfaces.service_client:151 [INFO] TrainingClient initialized for model 03d147ef-940e-56a6-a413-0fa67b141989:train:0
+tinker_cookbook.distillation.train_on_policy:824 [INFO] Created teacher sampling client for Qwen/Qwen3-32B (checkpoint: None)
+tinker_cookbook.distillation.train_on_policy:833 [INFO] Will train on 1 batches (dataset has 1)
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 1.98 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 24.25 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.01 seconds
+tinker_cookbook.distillation.train_on_policy:420 [INFO] User: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+Assistant: To evaluate the contour integral:
+
+\[
+\frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz
+\]
+
+where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), we will use **Cauchy's Integral Formula**.
+
+### Step 1: Identify the roots of the denominator
+The denominator \( z^2 + 4 \) has roots at:
+
+\[
+z = \pm 2i
+\]
+
+Since the square \( C \) encloses both \( z = 2i \) and \( z = -2i \), both singularities lie inside the contour.
+
+### Step 2: Rewrite the integrand
+The integrand can be rewritten as:
+
+\[
+\frac{z^2}{z^2 + 4} = \frac{z^2}{(z - 2i)(z + 2i)}
+\]
+
+This shows that the integrand has simple poles at \( z = 2i \) and \( z = -2i \).
+
+### Step 3: Apply Cauchy's Integral Formula
+Cauchy's Integral Formula states that for a function \( f(z) \) analytic inside and on a simple closed contour \( C \), and for a point \( a \) inside \( C \):
+
+\[
+f(a) = \frac{1}{2\pi i}\oint_C \frac{f(z)}{z - a}dz
+\]
+
+To evaluate the integral, we can decompose the integrand and apply Cauchy's formula to each pole separately.
+
+#### For \( z = 2i \):
+Rewrite the integrand as:
+
+\[
+\frac{z^2}{(z - 2i)(z + 2i)} = \frac{z^2 / (z + 2i)}{z - 2i}
+\]
+
+Here, \( f(z) = \frac{z^2}{z + 2i} \), and \( a = 2i \). Applying Cauchy's formula:
+
+\[
+f(2i) = \frac{1}{2\pi i}\oint_C \frac{z^2}{(z - 2i)(z + 2i)}dz
+\]
+
+Calculate \( f(2i) \):
+
+\[
+f(2i) = \frac{(2i)^2}{2i + 2i} = \frac{-4}{4i} = \frac{-1}{i} = i
+\]
+
+#### For \( z = -2i \):
+Rewrite the integrand as:
+
+\[
+\frac{z^2}{(z - 2i)(z + 2i)} = \frac{z^2 / (z - 2i)}{z + 2i}
+\]
+
+Here, \( f(z) = \frac{z^2}{z - 2i} \), and \( a = -2i \). Applying Cauchy's formula:
+
+\[
+f(-2i) = \frac{1}{2\pi i}\oint_C \frac{z^2}{(z - 2i)(z + 2i)}dz
+\]
+
+Calculate \( f(-2i) \):
+
+\[
+f(-2i) = \frac{(-2i)^2}{-2i - 2i} = \frac{-4}{-4i} = \frac{1}{i} = -i
+\]
+
+### Step 4: Sum the results
+The contour integral is the sum of the contributions from both poles:
+
+\[
+\frac{1}{2\pi i}\oint_C \frac{z^2}{z^2 + 4}dz = f(2i) + f(-2i) = i + (-i) = 0
+\]
+
+### Final Answer:
+\[
+\boxed{0}
+\]<|endoftext|>
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 2.04 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 2.66 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.00 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://03d147ef-940e-56a6-a413-0fa67b141989:train:0/weights/000001', 'sampler_path': 'tinker://03d147ef-940e-56a6-a413-0fa67b141989:train:0/sampler_weights/000001'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 7.82 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/tinker-cookbook-reg2/test_runs/gzh_smoke_20260512/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+                    Step 0                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Metric                         ┃ Value      ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ env/all/ac_tokens_per_turn     │ 878.333333 │
+│ env/all/by_group/frac_all_bad  │ 0.666667   │
+│ env/all/by_group/frac_all_good │ 0.333333   │
+│ env/all/by_group/frac_mixed    │ 0.000000   │
+│ env/all/correct                │ 0.333333   │
+│ env/all/format                 │ 0.000000   │
+│ env/all/ob_tokens_per_turn     │ 89.333333  │
+│ env/all/reward/total           │ 0.233333   │
+│ env/all/total_ac_tokens        │ 2635       │
+│ env/all/total_episodes         │ 3          │
+│ env/all/total_ob_tokens        │ 268        │
+│ env/all/total_turns            │ 3          │
+│ env/all/turns_per_episode      │ 1.000000   │
+│ optim/entropy                  │ 0.128261   │
+│ optim/fractal_dissonance       │ 0.046444   │
+│ optim/gz_active_frac           │ 0.333333   │
+│ optim/gz_h_delta               │ 0.090000   │
+│ optim/gz_h_excess              │ 0.016203   │
+│ optim/gz_h_target              │ 0.700000   │
+│ optim/gz_penalty_mean          │ 0.000788   │
+│ optim/gz_penalty_median        │ 0.000000   │
+│ optim/h_student                │ 0.601144   │
+│ optim/h_teacher                │ 0.647588   │
+│ optim/hurst_n_active_mean      │ 878.333333 │
+│ optim/hurst_num_windows_mean   │ 10.000000  │
+│ optim/hurst_weight_active_frac │ 0.000000   │
+│ optim/hurst_weight_enabled     │ 0.000000   │
+│ optim/hurst_weight_mean        │ 1.000000   │
+│ optim/hurst_weight_median      │ 1.000000   │
+│ optim/hurst_weight_signal_mad  │ 1.000000   │
+│ optim/hurst_weight_signal_med… │ 0.000000   │
+│ optim/hurst_weight_std         │ 0.000000   │
+│ optim/kl_sample_train_v1       │ 0.000371   │
+│ optim/kl_sample_train_v2       │ 0.000266   │
+│ optim/lr                       │ 0.000100   │
+│ optim/std_s_mean               │ 0.141803   │
+│ optim/std_s_median             │ 0.142594   │
+│ optim/std_t_mean               │ 0.137781   │
+│ optim/std_t_median             │ 0.145799   │
+│ progress/batch                 │ 0          │
+│ progress/done_frac             │ 1.000000   │
+│ teacher_kl                     │ 0.360706   │
+│ teacher_kl/dataset_0           │ 0.360706   │
+│ time/assemble_training_data    │ 0.011776   │
+│ time/compute_kl_penalty        │ 2.036918   │
+│ time/compute_kl_sample_train   │ 0.002398   │
+│ time/sample                    │ 24.250260  │
+│ time/save_checkpoint           │ 7.824651   │
+│ time/total                     │ 36.843396  │
+│ time/train                     │ 2.660849   │
+└────────────────────────────────┴────────────┘
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://03d147ef-940e-56a6-a413-0fa67b141989:train:0/weights/final', 'sampler_path': 'tinker://03d147ef-940e-56a6-a413-0fa67b141989:train:0/sampler_weights/final'}
+tinker_cookbook.distillation.train_on_policy:864 [INFO] Training completed successfully

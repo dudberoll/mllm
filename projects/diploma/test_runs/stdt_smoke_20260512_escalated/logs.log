@@ -1,0 +1,152 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512_escalated
+tinker_cookbook.checkpoint_utils:197 [INFO] No checkpoints found at /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512_escalated/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:228 [INFO] No checkpoints found with key state_path in /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512_escalated
+tinker.lib.internal_client_holder:289 [WARNING] Your Tinker SDK version is outdated. Please upgrade to the latest version.
+tinker.lib.public_interfaces.service_client:67 [INFO] ServiceClient initialized for session 9c489464-8e9a-5d8e-9d66-ed05eaf7d9ed
+tinker.lib.public_interfaces.service_client:151 [INFO] TrainingClient initialized for model 9c489464-8e9a-5d8e-9d66-ed05eaf7d9ed:train:0
+tinker_cookbook.distillation.train_on_policy:743 [INFO] Created teacher sampling client for Qwen/Qwen3-32B (checkpoint: None)
+tinker_cookbook.distillation.train_on_policy:752 [INFO] Will train on 1 batches (dataset has 1)
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 2.97 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 23.28 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.05 seconds
+tinker_cookbook.distillation.train_on_policy:397 [INFO] User: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+Assistant: Alright, I have this contour integral problem to solve:
+
+Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+First, I need to understand what's being asked. I have to evaluate a complex integral around a square contour using Cauchy's integral formula. Cauchy's integral formula relates the value of an analytic function inside a contour to its values on the contour itself.
+
+### Step 1: Identify the Function and the Contour
+
+The given integral is:
+
+\[
+\frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz
+\]
+
+Here, \( f(z) = \frac{z^2}{z^2+4} \) is the function inside the integral, and \( C \) is the square with vertices at \( \pm2 \) and \( \pm2+4i \).
+
+### Step 2: Determine the Singularities of the Function
+
+To apply Cauchy's integral formula, I need to find the singularities of \( f(z) \), i.e., the points where \( f(z) \) is not analytic.
+
+The denominator \( z^2 + 4 \) equals zero when \( z^2 = -4 \), so \( z = \pm 2i \).
+
+Therefore, the singularities are at \( z = 2i \) and \( z = -2i \).
+
+### Step 3: Check if the Singularities Lie Inside the Contour
+
+The contour \( C \) is a square with vertices at \( \pm2 \) and \( \pm2+4i \). I need to determine if \( 2i \) and \( -2i \) lie inside this square.
+
+Let's plot the points:
+
+- The real part of the vertices is \( \pm2 \).
+- The imaginary part of the vertices ranges from \( 0 \) to \( 4i \).
+
+Now, \( 2i \) and \( -2i \) have an imaginary part of \( 2 \) and \( -2 \), respectively. Since the imaginary part of the vertices goes from \( 0 \) to \( 4i \), both \( 2i \) and \( -2i \) lie inside the square.
+
+### Step 4: Apply Cauchy's Integral Formula
+
+Cauchy's integral formula states that if \( f(z) \) is analytic inside and on a simple closed contour \( C \), and \( a \) is a point inside \( C \), then:
+
+\[
+f(a) = \frac{1}{2\pi i} \oint_C \frac{f(z)}{z - a} dz
+\]
+
+In our case, \( f(z) = \frac{z^2}{z^2 + 4} \), and the singularity is at \( z = 2i \) (since \( -2i \) is also at work, but I'll handle it separately).
+
+Wait, actually, the function \( f(z) = \frac{z^2}{z^2 + 4} \) has singularities at \( z = \pm 2i \). Since both singularities are inside the contour, I need to consider both.
+
+But Cauchy's integral formula can handle multiple singularities by applying it separately for each.
+
+### Step 5: Apply the Formula for Each Singularity
+
+First, for \( z = 2i \):
+
+\[
+f(2i) = \frac{(2i)^2}{(2i)^2 + 4} = \frac{-4}{-4 + 4} = \frac{-4}{0}
+\]
+
+Wait, that's undefined. Hmm, I must have made a mistake.
+
+Ah, I see! The function \( f(z) = \frac{z^2}{z^2 + 4} \) has a pole at \( z = 2i \) because the denominator is zero there, but it's a simple pole since the numerator doesn't vanish.
+
+So, I need to use the residue theorem instead of directly applying Cauchy's integral formula.
+
+### Step 6: Compute the Residues
+
+The residue of \( f(z) \) at \( z = a \) is given by:
+
+\[
+\text{Res}(f, a) = \lim_{z \to a} (z - a) f(z)
+\]
+
+For \( z = 2i \):
+
+\[
+\text{Res}(f, 2i) = \lim_{z \to 2i} (z -
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 2.40 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 3.45 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.01 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://9c489464-8e9a-5d8e-9d66-ed05eaf7d9ed:train:0/weights/000001', 'sampler_path': 'tinker://9c489464-8e9a-5d8e-9d66-ed05eaf7d9ed:train:0/sampler_weights/000001'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 6.66 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/test_runs/stdt_smoke_20260512_escalated/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+                    Step 0                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Metric                         ┃ Value      ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ env/all/ac_tokens_per_turn     │ 918.333333 │
+│ env/all/by_group/frac_all_bad  │ 0.666667   │
+│ env/all/by_group/frac_all_good │ 0.333333   │
+│ env/all/by_group/frac_mixed    │ 0.000000   │
+│ env/all/correct                │ 0.333333   │
+│ env/all/format                 │ 0.000000   │
+│ env/all/ob_tokens_per_turn     │ 89.333333  │
+│ env/all/reward/total           │ 0.233333   │
+│ env/all/total_ac_tokens        │ 2755       │
+│ env/all/total_episodes         │ 3          │
+│ env/all/total_ob_tokens        │ 268        │
+│ env/all/total_turns            │ 3          │
+│ env/all/turns_per_episode      │ 1.000000   │
+│ optim/entropy                  │ 0.140410   │
+│ optim/fractal_dissonance       │ 0.091265   │
+│ optim/h_student                │ 0.614244   │
+│ optim/h_teacher                │ 0.547815   │
+│ optim/hurst_num_windows_mean   │ 3.333333   │
+│ optim/hurst_weight_active_frac │ 1.000000   │
+│ optim/hurst_weight_enabled     │ 1.000000   │
+│ optim/hurst_weight_mean        │ 1.000000   │
+│ optim/hurst_weight_median      │ 1.000000   │
+│ optim/hurst_weight_signal_mad  │ 0.037668   │
+│ optim/hurst_weight_signal_med… │ 0.072532   │
+│ optim/hurst_weight_std         │ 0.081650   │
+│ optim/kl_sample_train_v1       │ 0.000950   │
+│ optim/kl_sample_train_v2       │ 0.000448   │
+│ optim/lr                       │ 0.000100   │
+│ optim/std_s_mean               │ 0.054805   │
+│ optim/std_s_median             │ 0.060524   │
+│ optim/std_t_mean               │ 0.075227   │
+│ optim/std_t_median             │ 0.072532   │
+│ progress/batch                 │ 0          │
+│ progress/done_frac             │ 1.000000   │
+│ teacher_kl                     │ 0.563485   │
+│ teacher_kl/dataset_0           │ 0.563485   │
+│ time/assemble_training_data    │ 0.048073   │
+│ time/compute_kl_penalty        │ 2.396211   │
+│ time/compute_kl_sample_train   │ 0.008353   │
+│ time/sample                    │ 23.285254  │
+│ time/save_checkpoint           │ 6.657829   │
+│ time/total                     │ 35.888634  │
+│ time/train                     │ 3.448554   │
+└────────────────────────────────┴────────────┘
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://9c489464-8e9a-5d8e-9d66-ed05eaf7d9ed:train:0/weights/final', 'sampler_path': 'tinker://9c489464-8e9a-5d8e-9d66-ed05eaf7d9ed:train:0/sampler_weights/final'}
+tinker_cookbook.distillation.train_on_policy:783 [INFO] Training completed successfully

@@ -1,0 +1,417 @@
+: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+Assistant:发展空间是大，使用维尔的定理， �吾等需要计算该积分 \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \)，其中 C 是边长以 2为边的正方形，顶点为±2和±2+4i，即顶点位于 (±2, ±(2+4i)) 的正方形，现在采用柯西积分定理，求上述积分的值。将答案放入方框内。
+
+Assistant: 要解决这个问题，我们需要使用柯西积分公式来计算给定的积分。柯西积分公式表明，如果 \( f(z) \) 在包含路径 \( C \) 的导出区域内 (这里 \( C \) 是边长为 2 和 2+4i 的正方形路径) 是解析的，并且 \( f^{(n)}(a) \) 是导数，那么：
+
+\[ \frac{1}{2\pi i} \oint_C \frac{z^2}{z^2 + 4} dz = f(a) \]
+
+在应用公式之前，我们需要确认是否 \( \frac{z^2}{z^2 + 4} \) 在 我们 的 \( C \) 附近足够解析。给定的函数是 \( \frac{z^2}{z^2 + 4} \)，我们可以重写分母中的 4 谬，即：
+
+\[ \frac{z^2}{(z^2 + 2^2)} \]
+
+因为 4 是 2的平方，所以礼物的表达式是：
+
+\[ \frac{z^2}{z^2 + 2^2} = \frac{z^2}{z^2 + 4} \cdot \]
+
+注意，分母的形式 \( z^2 + (2)^2 \) 显然是，当 \( |z| \leq 2 \( 以外时，复平面上所有点的总和的平方可能会有问题吗？没有，都用这简单的直线? 因为分母中的 4是（2）^2，所以函数确实是在导出区域之外在复平面上，因为跨越路径是正方形，顶点被移到 complex plane的。
+
+因此，柯西残差定理中的主要项在 \( C \) 的路径之外足够解析。然后，我们可以改写积分：
+
+\[ \frac{1}{2\pi i} \oint_C \frac{z^2}{z^2 + 4} dz \]
+
+将这种情况看作在 \( C \) 的路径的外部足够解析，因此在 \( C \) 的路径内部拥有 -4 这个斗的，candidate at \( z = \pm 2 \) 是 zeros of denominator \( z^2 + 4 = (zi + 2i)(... 如果函数的分子在2面临境时直接相关，那么零分临时区分?
+
+等等，现在我们应用公式。根据柯西定理，一个生来在导出区域分析的函数，其积分在路径 \( C \) 内等于1/(2πi)积分乘以 functions 这会剩下差(int)(f(z) - z^(n)) e^{i k}a d z ?
+
+等等，可能我的步骤有点混乱。在这里，由于分子中的分子是 \( z^2 \)，而分母中的固定常数是多少？是的：
+
+\[ \frac{z^2}{z^2 + (2)^2} \]
+
+所以，分母中的固定常数是 \( (2)^2 \( = 4，所以礼物的表达式是：
+
+\[ \frac{z^2}{z^2 + 4} \]
+
+因此，分母中的 4 是 2的平方，所以分母中的 fixed常数是 4，所以函数的表达式 involves:
+
+\[ \frac{Z}{Z^2 +4} \]
+
+所以，分母中的4就是这4，因此，这个函数具有分母中的 4，所以成品，该函数在多处解析，但在含有z=±2的路径的区域内是否有 poles?
+
+给出的积分路径是边长为2的正方形，其顶点在 (±2, ±(2+4i))，所以该正方形出现在complex plane的复数平面的，因此，the function \( \frac{z^2}{z^2 +4} \) has poles 当 \( z^2 +4 =0 \),即 \( z^2 = -4 \), so \( z=±2i \).这两个 poles 内 (在路径 C 的周边，周边 出于复数平面的，所以这些 poles 在复平面的，且离路径C的距离是 \距离， therefore, 因此, 该积分路径是正方形， ver. u may one.
+
+Since the square's vertices at \( z = \pm 2 \) 和 \( \pm2+4i \), so these vertices are horizontal或 vertical，计算er. This means that the path \( C \) 是围绕 2点的的平方， and the 中心位于中心点吗？
+
+Let me computations:
+
+The centre of the square is the average of the vertices:
+
+底部pointy: 计算中心的coordinates 大小.
+
+中心的点是：
+
+x-坐标的平均值为:
+
+\[ \frac{2 +2 +2+2}{4} doesn't，需要四个 vertices的平均?
+
+两个 vertex是 overbut 中心：
+
+这两个 vertices are (/, / / ), so the 这个:
+
+两个 vertices with coordinates (\( 2+ \))... Wait, the vertices are at \( z = \pm 2 \plus 4i \), so the coordinates are:
+
+For the vertex at \( (\pm2, \pm(2+4i)) \):
+
+即: the vertices are at (2, 2+4i), (2, 2-4i), (-2, 2+4i), (-2, 2-4i).
+
+所以中心是: 平下 these four points的 x and y坐标.
+
+ Average of x-coordinates:
+
+2, 2, -2, -2 — 需平均.
+
+总和 = 2+2-2-2=0.
+
+平均 x 是 \(0/4=0 \.
+
+Average of ycoordinates:
+
+对于每个 point:
+
+First point: (2, 2+4i) → y = 2+4i = 2 +4i.
+
+Second: (2, 2-4i).
+
+Third: (-2, 2+4i).
+
+第四: (-2, 2-4i).
+
+Summing the y:
+
+for first: 2 +4i.
+
+second: 2-4i.
+
+third: 2 +4i.
+
+fourth: 2 -4i.
+
+总和 is:
+
+(2+4i)+ (2-4i) + (2+4i)+ (2-4i).
+
+加起来的这作：
+
+分解实部与虚部：
+
+实部项:
+
+每个 term的实部:
+
+对于 first term’s y的real part 是 2 (的实部). 因为 4i的实部是 zero.
+
+同理，每个 term's 实部是 2的实部?
+
+是的,即:
+
+每个 term at 2 has 负实部的孩子 2的实部的模.
+
+但是, 在这种情况下，因为 terms are complex numbers with real part 2 and imaginary parts.
+
+Thus, the sum of real parts is 2+2+2+2 = 4×2=8?
+
+ 不，每个 point有一个 x也是如此ya.
+
+ configuration是四 vertices.
+
+每个 vertex有相应的 coordinates (x,y):
+
+first: (2, 2+4i) → y=2+4i
+
+second: (2, 2-4i)
+
+third: (-2, 2+4i)
+
+fourth: (-2, 2-4i)
+
+因此, summing these y coordinates:
+
+求和:
+
+(2+4i) + (2-4i) + (2+4i) + (2-4i)
+
+这是:
+
+2+4i +2-4i +2+4i +2-4i
+
+可以把这分解为实部和虚部的总和：
+
+Real parts:
+
+2 (from first) +2 (from second) +2 (third) +2 (fourth) = 8.
+
+假 part:
+
+4i -4i +4i -4i.
+
+即：
+
+每个 term的 imaginary part:
+
+First term: +4i → +4i.
+
+第二: -4i.
+
+第三: +4i.
+
+第四: -4i.
+
+因此，总和 imaginary part 是:
+
+4i -4i +4i -4i = 0复的总和?
+
+是的，这虚部部分的总和是:
+
+(The imaginary parts:
+
+第一: +4i的imag部分是 4i的模?
+
+不, 这个的虚部的部分是那 this term的 imaginary part.
+
+每个 term的 imaginary part是:
+
+第一个 term's imaginary part is 4i的 imaginary part是 +4i，所以它为 +4i → whole部分?
+
+不对，所有 terms的 imaginary parts 的求和中的,首先的, combined 的总和是：
+
+(4i的 imaginary part)的总和是？
+
+从各个 term来看，每个带有 4i的p...
+
+不必计算，它们的总和为0.
+
+因此, the sum of all y coordinates 是：
+
+Real部分之和: 8.
+
+虚部之和是0.
+
+所以 average y-coordinate is (8 +0)/4=2.
+
+Thus, the center of the square is at (0,2).
+
+所以这个正方形的中心在 (0,2) 处.
+
+所以，这个函数在中心点 \( z =0 \) 时，它的分母中的 certain terms 的总和为零.
+
+但，回到问题，我们需要计算该积分：
+
+\[ \frac{1}{2\pi i} \oint_C \frac{z^2}{z^2 + 4} dz \]
+
+其中积分路径是边长为2的正方形，顶点位置如下：
+
+Vertex 1: (2, 2+4i)
+
+Vertex 2: (2, 2-4i)
+
+Vertex 3: (-2, 2+4i)
+
+Vertex 4: (-2, 2-4i)
+
+中的 which 复平面中的.
+
+ 所以, this function \( \frac{z^2}{z^2+4} \) 且在 C 的情境下足够解析, 因此应用柯西积分公式.
+
+Thus,根据柯西积分定理，如果函数在围绕某个点的闭合路径的导出区域之外足够解析，那么这个积分等于函数在路径内部的 poles的数值.
+
+Given that the center of the square is at (0,2)， so the center 是在 (0,2)， but 中心 is 计算的需要的是 the center of the function's解析域?
+
+ 不, 增加的.
+
+我们 to计算 the integral over the sware \( C \)， which has 顶点 do在 (2, 2+4i)，(-2,相同); so 沿 this边的正方动能.
+
+是 的.
+
+我们需要找出该积分的值.
+
+Now,根据 function \( f(z) = \frac{z^2}{z^2 +4} \)，该函数的分母是 \( z^2 +4 \)，所以 terms equal to 0的参数是:
+
+\( z^2 + 4 =0 \Rightarrow z^2 =-4 \Rightarrow z = \pm2i \)。
+
+这两个 poles 在复平面中并离中心点 (0,2)的.
+
+他们的 distances to the center:
+
+distance from z=2i to center (0,2):
+
+ horizontally是 0, 上下在 y轴线嬰 room.
+
+ but their distance to the center in complex plane involves both x and y?
+
+ No, for CAUCHY'S定理, the key is whether the poles are inside the path \( C \) or not.
+
+First,计算 thevery的三-linear部分.
+
+The path \( C \) is the square with vertices at:
+
+ (2, 2+4i)
+
+ (2, 2-4i)
+
+ (-2, 2+4i)
+
+ (-2, 2-4i)
+
+ center是 (0,2).
+
+所以，这条方形路径包住中心点吗？
+
+是的',因为 the正方形的 边长是2, 所以 the正方形的中心从顶点 (2, ...)开始.
+
+ 距离 center:
+
+从顶点 (2, 2+4i)到中心 (0,2 的：
+
+x distance是 |2 -0|=2， which less than 2的边长? 不，边长是2的，所以 square的 laid出在距离 from中心 的 any vertex 是 the same points？
+
+不对。
+
+ the square is from (2,-2)到 (-2, 2-4i) 等等? 不， need重新核心.
+
+Wait, 候选项 are the vertices at (±2, values which include their imaginary parts):
+
+For the first点, x=2, y=2+4i.
+
+ the center (0,2).
+
+因此, between the vertex (2,2+4i) 的 and the center (0,2), the horizontal distance is 2, which is equal to the square's边长 2.所以, the vertex and the center are horizontally separated by exactly the边 length of the square.
+
+Therefore, the vertex的 point is at (2 yer, and the center is at position (0,2).
+
+因此, 这个顶点的点，它距离 center的位置：
+
+在 the real line (x-axis)中，这不可，因为 it's in the complex plane.
+
+但在 the 虚轴中的?
+
+ 不， we're在 complex plane 中考虑一切.
+
+ 施的：
+
+我们需要 identify whether the two poles \( z=±2i \) are inside the path \( C \) or not.
+
+目前, 这两个 poles位于 two the points (2i 和 −2i), 其实地：
+
+-2i is the lower one.
+
+These are points along the imaginary axis.
+
+因此,他们的位置 is:
+
+First pole (时, when is this?)
+
+the two poles are at z= ± 2i.
+
+这些专用 caves 位于在复 plane处的:
+
+ two 约物的形式是 (x,y) with x=0 和 y=±2i's .
+
+Since the square围 occupies open in the real plane (center在 (0,2)是的, which is distance H焦高, but in the imaginary direction the square man spaces imp 可能 not reaching the poles.
+
+ 为什么?
+
+ 子 the square围的路径 is the square with vertices在 (2, 2 +4i), (2,2−4i), (-2, 2 +4i), (-2,2 -4i).
+
+ so the四个 corners lie in the approximate positions:
+
+ (2, y大部分)
+
+ where y 的 imaginary part is 4 (的 since 4i的 imaginary part is 4i's imaginary part is 4i 的虚部是 4i 的模 or?
+
+ wait, 另一个 arrive:
+
+ 四个 vertices are:
+
+ (2, 2 + stopping? 不， the y坐标是:
+
+ the y parts are 2+4i, 2-r4i, 2+41,
+
+2-4i 。
+
+因此, the four vertices are located at (±2, yの_= 2±4i).
+
+因此, the square围 has vertices在 (±2, ± (2+4i)) 的位置 ?
+
+ 不， is 是的的:
+
+ 2加4i是 as y coordinate的、 的 particle 的, so the vertices are located at (±2, ±(2 +4i))， but这 may lead to other interpretations.
+
+实际上, the vertices are at:
+
+ (2, 2+4i), (2, 2−4i), (-2,2+4i), (-2,2−4i).
+
+因此，这4 corners are located in the complex plane at these points.
+
+Are these points inside the square路径 ?
+
+要检查 this, we need to determine the position of the poles relative to the square围.
+
+Consider the square围 has vertices在：
+
+顶点1: (2, y = 2 +4i).
+
+顶点2: (2, y= 2 -4i).
+
+顶点3: (-2, y=2 +4i).
+
+顶点4: (-2, y=2 -4i).
+
+因此, the four vertices form a square围跨越 the horizontal线 at y=2 曼(？). 他们分布在复平面的 .
+
+现在，要确定 whether the poles at \( z=2i \) and \( z=-2i \) are inside the path \( C \) or not.
+
+首先, consider the pole at \( z=2i \). This point has coordinates (0 real part? 不，the point is at 0的 real 纶. specifically, 0's real部分的 anything.为:
+
+ the point \( z=2i \) is located at (0\[x\), y=2i 的 imaginary部分 %%: 2i是的 imagin的实部是 zero， so its coordinate is (0, 2i).
+
+ 不, 复平面中的 any point can be represented as (x, y), where 平下ow the。
+
+但， 这些 points:
+
+ the point z=2i is located along the imaginary axis at (0,2i).
+
+ 以及 the其他 的 poi：
+
+ point z=-2i 烟在 (0, -2i).
+
+ the center of the square is at (0,2).
+
+ 因此, the four vertices of the square围 is:
+
+(2,差异) 是 the vertices与 the 的 中心关于 their的位置线 along the real门 axis.
+
+因此, the square围's four vertices are at x=±2 widespread.
+
+因此, the square围 is a square予周边 of 2在 the real line 的方向(的顶点 points at ?> 的 →不同的(是但 the vertices are located at (±2，加上/减4i)在 the complex plane一站式、 的.
+
+因此， the square围 forms a square in the complex plane神奇大面对, with verti何 evenly distributed in 'the quar court across the四 derivative homosexuals').
+
+返回到问题: the积分 ism 过 the square围 with vertices在 the given点.
+
+我们需要确定 如何 these poles are inside the path \( C \).
+
+根据 the vertices的 coordinates:
+
+The two poles are at \( z=2i \) 和 \( z=-2i \).
+
+现在, need to determine if these poles are inside或 outside the square围.
+
+ to determine whether they are inside or outside, we consider the position of these poles relative to the vertices of the square.
+
+ the vertices of the square围 are at:
+
+(2, 2+4i): this is位于 the right half为 the real门轴, with a high positive imaginary component.
+
+(2, 2-4i): 在 the same x (2) 但是 lower imaginary than the first vertex.
+
+(-

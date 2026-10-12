@@ -1,0 +1,363 @@
+tinker_cookbook.utils.ml_log:477 [INFO] Logging to: /Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512
+tinker_cookbook.checkpoint_utils:197 [INFO] No checkpoints found at /Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:228 [INFO] No checkpoints found with key state_path in /Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512
+tinker.lib.internal_client_holder:289 [WARNING] Your Tinker SDK version is outdated. Please upgrade to the latest version.
+tinker.lib.public_interfaces.service_client:67 [INFO] ServiceClient initialized for session 5981dac4-2053-562e-93ed-93480ebf92a8
+tinker.lib.public_interfaces.service_client:151 [INFO] TrainingClient initialized for model 5981dac4-2053-562e-93ed-93480ebf92a8:train:0
+tinker_cookbook.distillation.train_on_policy:766 [INFO] Created teacher sampling client for Qwen/Qwen3-32B (checkpoint: None)
+tinker_cookbook.distillation.train_on_policy:775 [INFO] Will train on 3 batches (dataset has 3)
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 2.27 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 77.51 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.12 seconds
+tinker_cookbook.distillation.train_on_policy:406 [INFO] User: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+Assistant: To evaluate the contour integral using Cauchy's integral formula, we need to find the singularities of the integrand and then apply Cauchy's formula.
+
+The integrand is given by \(\frac{z^2}{z^2+4}\). We first identify the singularities by solving the equation \(z^2 + 4 = 0\):
+
+\[ z^2 = -4 \implies z = \pm 2i \]
+
+These are the singularities of the integrand. Since \(C\) is the square with vertices \(\pm2 \) and \(\pm2+4i\), both singularities \(2i\) and \(-2i\) lie inside the contour \(C\).
+
+Now, we apply Cauchy's integral formula for a function \(f(z)\) that is analytic inside and on a simple closed contour \(C\) except for a finite number of points inside it:
+
+\[ \frac{1}{2\pi i} \oint_C \frac{f(z)}{z-a} dz = \begin{cases} 
+f(a), & \text{if } a \text{ is inside } C \\
+0, & \text{if } a \text{ is outside } C 
+\end{cases} \]
+
+For \(f(z) = \frac{z^2}{z+2i} \cdot \frac{1}{z+2i}\) at \(a = -2i\), we have:
+
+\[ \frac{1}{2\pi i} \oint_C \frac{z^2}{z^2+4}dz = f(-2i) \]
+
+\[ f(-2i) = \frac{(-2i)^2}{(-2i)+2i} = \frac{4i^2}{0} \]
+
+However, since \(2i\) and \(-2i\) are both simple poles, we can apply the residue theorem instead of directly using Cauchy's integral formula. The residue at a simple pole \(z = a\) for a function \(f(z)\) is given by:
+
+\[ \text{Res}(f, a) = \lim_{z \to a} (z-a)f(z) \]
+
+For the residuals at \(z = 2i\) and \(z = -2i\):
+
+\[ \text{Res}(f, 2i) = \lim_{z \to 2i} (z-2i)\frac{z^2}{(z-2i)(z+2i)} = \lim_{z \to 2i} \frac{z^2}{z+2i} = \frac{(2i)^2}{2i+2i} = \frac{-4}{4i} = \frac{-1}{i} = i \]
+
+\[ \text{Res}(f, -2i) = \lim_{z \to -2i} (z+2i)\frac{z^2}{(z-2i)(z+2i)} = \lim_{z \to -2i} \frac{z^2}{z-2i} = \frac{(-2i)^2}{-2i-2i} = \frac{-4}{-4i} = \frac{1}{i} = -i \]
+
+The sum of the residues is \(i + (-i) = 0\).
+
+Therefore, the value of the contour integral is \(\boxed{0}\).<|endoftext|>
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 8.97 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 10.62 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.02 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 1.84 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+                     Step 0                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+┃ Metric                         ┃ Value       ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━┩
+│ env/all/ac_tokens_per_turn     │ 1202.531250 │
+│ env/all/by_group/frac_all_bad  │ 0.250000    │
+│ env/all/by_group/frac_all_good │ 0.375000    │
+│ env/all/by_group/frac_mixed    │ 0.375000    │
+│ env/all/correct                │ 0.562500    │
+│ env/all/format                 │ 0.000000    │
+│ env/all/ob_tokens_per_turn     │ 84.645833   │
+│ env/all/reward/total           │ 0.462500    │
+│ env/all/total_ac_tokens        │ 115443      │
+│ env/all/total_episodes         │ 96          │
+│ env/all/total_ob_tokens        │ 8126        │
+│ env/all/total_turns            │ 96          │
+│ env/all/turns_per_episode      │ 1.000000    │
+│ optim/entropy                  │ 0.147403    │
+│ optim/fractal_dissonance       │ 0.057709    │
+│ optim/h_student                │ 0.613285    │
+│ optim/h_teacher                │ 0.584028    │
+│ optim/hurst_n_active_mean      │ 1202.531250 │
+│ optim/hurst_num_windows_mean   │ 9.375000    │
+│ optim/hurst_weight_active_frac │ 0.000000    │
+│ optim/hurst_weight_enabled     │ 0.000000    │
+│ optim/hurst_weight_mean        │ 1.000000    │
+│ optim/hurst_weight_median      │ 1.000000    │
+│ optim/hurst_weight_signal_mad  │ 1.000000    │
+│ optim/hurst_weight_signal_med… │ 0.000000    │
+│ optim/hurst_weight_std         │ 0.000000    │
+│ optim/kl_sample_train_v1       │ 0.000524    │
+│ optim/kl_sample_train_v2       │ 0.000421    │
+│ optim/lr                       │ 0.000100    │
+│ optim/std_s_mean               │ 0.153808    │
+│ optim/std_s_median             │ 0.136359    │
+│ optim/std_t_mean               │ 0.135406    │
+│ optim/std_t_median             │ 0.122573    │
+│ progress/batch                 │ 0           │
+│ progress/done_frac             │ 0.333333    │
+│ teacher_kl                     │ 0.368858    │
+│ teacher_kl/dataset_0           │ 0.368858    │
+│ time/assemble_training_data    │ 0.115288    │
+│ time/compute_kl_penalty        │ 8.969537    │
+│ time/compute_kl_sample_train   │ 0.016054    │
+│ time/sample                    │ 77.510412   │
+│ time/save_checkpoint           │ 1.835796    │
+│ time/total                     │ 99.403973   │
+│ time/train                     │ 10.622608   │
+└────────────────────────────────┴─────────────┘
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 75.27 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.11 seconds
+tinker_cookbook.distillation.train_on_policy:406 [INFO] User: Is it possible to construct a projection operator (which is not the identity operator) in \(\mathbb{R}^n\)? For example, consider the space \(\mathbb{R}^4\). Write your answer in \boxed{} format.
+
+Assistant: Yes, it is possible to construct a projection operator (which is not the identity operator) in \(\mathbb{R}^n\). For example, in \(\mathbb{R}^4\), consider the projection onto the subspace spanned by the vector \(\mathbf{v} = (1, 1, 0, 0)\). The projection operator \(P\) onto this subspace can be constructed as follows:
+
+\[
+P = \frac{\mathbf{v} \mathbf{v}^T}{\mathbf{v}^T \mathbf{v}} = \frac{(1, 1, 0, 0)(1, 1, 0, 0)^T}{1 \cdot 1 + 1 \cdot 1 + 0 \cdot 0 + 0 \cdot 0} = \frac{(1, 1, 0, 0)(1, 1, 0, 0)^T}{2}
+\]
+
+Calculating the product:
+
+\[
+P = \frac{(1, 1, 0, 0)(1, 1, 0, 0)^T}{2} = \frac{1}{2} \begin{pmatrix} 1 & 1 & 0 & 0 \\ 1 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix}
+\]
+
+This projection operator \(P\) projects any vector in \(\mathbb{R}^4\) onto the line spanned by \(\mathbf{v}\). It is not the identity operator because it maps vectors in directions other than \(\mathbf{v}\) to the zero vector.
+
+Thus, the projection operator in \(\boxed{\mathbb{R}^4}\) is:
+
+\[
+P = \frac{1}{2} \begin{pmatrix} 1 & 1 & 0 & 0 \\ 1 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix}
+\]<|endoftext|>
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 8.80 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 11.99 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.01 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 3.05 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+                     Step 1                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+┃ Metric                         ┃ Value       ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━┩
+│ env/all/ac_tokens_per_turn     │ 1132.093750 │
+│ env/all/by_group/frac_all_bad  │ 0.416667    │
+│ env/all/by_group/frac_all_good │ 0.270833    │
+│ env/all/by_group/frac_mixed    │ 0.312500    │
+│ env/all/correct                │ 0.427083    │
+│ env/all/format                 │ 0.000000    │
+│ env/all/ob_tokens_per_turn     │ 90.145833   │
+│ env/all/reward/total           │ 0.327083    │
+│ env/all/total_ac_tokens        │ 108681      │
+│ env/all/total_episodes         │ 96          │
+│ env/all/total_ob_tokens        │ 8654        │
+│ env/all/total_turns            │ 96          │
+│ env/all/turns_per_episode      │ 1.000000    │
+│ optim/entropy                  │ 0.151652    │
+│ optim/fractal_dissonance       │ 0.062698    │
+│ optim/h_student                │ 0.600204    │
+│ optim/h_teacher                │ 0.581258    │
+│ optim/hurst_n_active_mean      │ 1132.093750 │
+│ optim/hurst_num_windows_mean   │ 9.479167    │
+│ optim/hurst_weight_active_frac │ 0.000000    │
+│ optim/hurst_weight_enabled     │ 0.000000    │
+│ optim/hurst_weight_mean        │ 1.000000    │
+│ optim/hurst_weight_median      │ 1.000000    │
+│ optim/hurst_weight_signal_mad  │ 1.000000    │
+│ optim/hurst_weight_signal_med… │ 0.000000    │
+│ optim/hurst_weight_std         │ 0.000000    │
+│ optim/kl_sample_train_v1       │ 0.000318    │
+│ optim/kl_sample_train_v2       │ 0.000433    │
+│ optim/lr                       │ 0.000100    │
+│ optim/std_s_mean               │ 0.156082    │
+│ optim/std_s_median             │ 0.148734    │
+│ optim/std_t_mean               │ 0.142698    │
+│ optim/std_t_median             │ 0.126440    │
+│ progress/batch                 │ 1           │
+│ progress/done_frac             │ 0.666667    │
+│ teacher_kl                     │ 0.398982    │
+│ teacher_kl/dataset_0           │ 0.398982    │
+│ time/assemble_training_data    │ 0.106737    │
+│ time/compute_kl_penalty        │ 8.802460    │
+│ time/compute_kl_sample_train   │ 0.011766    │
+│ time/sample                    │ 75.266298   │
+│ time/save_checkpoint           │ 3.053864    │
+│ time/total                     │ 99.538269   │
+│ time/train                     │ 11.989728   │
+└────────────────────────────────┴─────────────┘
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting sample
+tinker_cookbook.utils.misc_utils:23 [INFO] sample took 76.28 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting assemble_training_data
+tinker_cookbook.utils.misc_utils:23 [INFO] assemble_training_data took 0.11 seconds
+tinker_cookbook.distillation.train_on_policy:406 [INFO] User: Determine the values of $m$ for which the integral \( \int_0^{\pi/2} \frac{1-\cos(x)}{x^m} \, dx \) converges. Write your answer in \boxed{} format.
+
+Assistant: Alright, I have this integral problem:
+
+\[ \int_0^{\pi/2} \frac{1 - \cos(x)}{x^m} \, dx \]
+
+I need to find all values of \( m \) for which this integral converges. I'm not entirely sure how to approach this, but I'll try to break it down step by step.
+
+### Understanding the Problem
+
+First, I need to understand what it means for an integral to converge. In this case, it's a definite integral from 0 to \( \frac{\pi}{2} \). The integrand is \( \frac{1 - \cos(x)}{x^m} \). The function \( 1 - \cos(x) \) is continuous and positive on the interval \( (0, \frac{\pi}{2}] \), but as \( x \) approaches 0, \( 1 - \cos(x) \) behaves like \( \frac{x^2}{2} \) (from the Taylor series expansion), so the integrand behaves like \( \frac{x^2}{2x^m} = \frac{x^{2 - m}}{2} \) near 0.
+
+This suggests that the behavior of the integrand near 0 is crucial for determining convergence. The integral is improper at \( x = 0 \) because the denominator \( x^m \) approaches 0 as \( x \) approaches 0.
+
+### Identifying the Type of Improper Integral
+
+Improper integrals can be of two types:
+
+1. **Type 1**: The interval of integration is infinite, but in this case, the interval is finite (\( 0 \) to \( \frac{\pi}{2} \)), so this isn't an issue.
+
+2. **Type 2**: The integrand has an infinite discontinuity at some point in the interval. Here, as \( x \) approaches 0, the integrand \( \frac{1 - \cos(x)}{x^m} \) approaches infinity if \( m \) is positive, which would make the integral improper.
+
+So, I need to determine for which values of \( m \) the integral converges despite the integrand becoming infinite as \( x \) approaches 0.
+
+### Analyzing the Behavior Near 0
+
+Let's focus on the behavior of the integrand as \( x \) approaches 0. We know that:
+
+\[ 1 - \cos(x) \approx \frac{x^2}{2} \]
+
+for small \( x \). Therefore, near \( x = 0 \):
+
+\[ \frac{1 - \cos(x)}{x^m} \approx \frac{x^2 / 2}{x^m} = \frac{x^{2 - m}}{2} \]
+
+So, the integrand behaves like \( \frac{x^{2 - m}}{2} \) near 0.
+
+I recall that for an integral of the form \( \int_0^a x^n \, dx \), it converges if \( n > -1 \). Applying this to our case:
+
+\[ \frac{x^{2 - m}}{2} \]
+
+Here, the exponent is \( 2 - m \). So, the integral \( \int_0^{\pi/2} \frac{x^{2 - m}}{2} \, dx \) will converge if \( 2 - m > -1 \), which simplifies to:
+
+\[ 2 - m > -1 \]
+\[ -m > -3 \]
+\[ m < 3 \]
+
+Wait, that seems straightforward. If \( m < 3 \), then \( 2 - m > -1 \), and the integral converges.
+
+But I need to confirm this. Maybe I should check the integral more carefully.
+
+### Checking the Integral Convergence
+
+Let's consider the integral:
+
+\[ \int_0^{\pi/2} \frac{1 - \cos(x)}{x^m} \, dx \]
+
+I can split this into two integrals:
+
+\[ \int_0^{\pi/2} \frac{1}{x^m} \, dx - \int_0^{\pi/2} \frac{\cos(x)}{x^m} \, dx \]
+
+But I'm not sure if that helps directly. Alternatively, since \( 1 - \cos(x) \approx \frac{x^2}{2} \) near 0, I can compare the given integral to \( \int_0^{\pi/2} \frac{x^2}{2x^m} \, dx = \frac{1}{2} \int_0^{\pi/2} x^{2 - m} \, dx \).
+
+From my earlier reasoning, \( \int_0^{\pi/2} x^{2 - m} \, dx \) converges if \( 2 - m > -1 \), i.e., \( m < 3 \).
+
+But I need to ensure that the approximation \( 1 - \cos(x) \approx \frac{x^2}{2} \) is valid near 0 and that the integral of the difference \( \frac{1 - \cos(x)}{x^m} - \frac{x^{2 - m}}{2} \) doesn't affect convergence.
+
+Wait, perhaps I can use the limit comparison test. Let's set:
+
+\[ f(x) = \frac{1 - \cos(x)}{x^m} \]
+\[ g(x) = \frac{x^{2 - m}}{2} \]
+
+As \( x \to 0 \), \( \frac{1 - \cos(x)}{x^m} \approx \frac{x^2 / 2}{x^m} = \frac{x^{2 - m}}{2} \), so \( \lim_{x \to 0} \frac{f(x)}{g(x)} = 1 \).
+
+Since \( g(x) = \frac{x^{2 - m}}{2} \), the integral \( \int_0^{\pi/2} g(x) \, dx \) converges if \( 2 - m > -1 \), i.e., \( m < 3 \).
+
+By the limit comparison test, the integral \( \int_0^{\pi/2} f(x) \, dx \) converges if and only if \( \int_0^{\pi/2} g(x) \, dx \) converges. Therefore, the original integral converges if \( m < 3 \).
+
+But wait, I need to check the interval \( [\pi/2, \infty) \) as well, but the problem specifies the upper limit is \( \pi/2 \), so there's no issue with infinity in the interval.
+
+### Verifying the Answer
+
+To ensure I didn't make a mistake, let's test a value of \( m \) less than 3 and see if the integral converges.
+
+Let's take \( m = 2 \):
+
+\[ \int_0^{\pi/2} \frac{1 - \cos(x)}{x^2} \, dx \]
+
+As \( x \to 0 \), \( \frac{1 - \cos(x)}{x^2} \approx \frac{x^2 / 2}{x^2} = \frac{1}{2} \), which is finite. So, the integrand is continuous on \( (0, \pi/2] \) and behaves nicely at 0. Therefore, the integral converges for \( m = 2 \).
+
+Now, let's test \( m = 4 \):
+
+\[ \int_0^{\pi/2} \frac{1 - \cos(x)}{x^4} \, dx \]
+
+As \( x \to 0 \), \( \frac{1 - \cos(x)}{x^4} \approx \frac{x^2 / 2}{x^4} = \frac{1}{2x^2} \), which behaves like \( \frac{1}{x^2} \). The integral \( \int_0^c \frac{1}{x^2} \, dx \) diverges as \( x \to 0 \) for any \( c > 0 \). Therefore, the integral diverges for \( m = 4 \).
+
+This confirms that the integral converges when \( m < 3 \) and diverges when \( m \geq 3 \).
+
+### Final Answer
+
+After analyzing the behavior of the integrand near 0 and verifying with specific values of \( m \), I conclude that the integral converges for all real numbers \( m \) less than 3.
+
+\[
+\boxed{m < 3}
+\]<|endoftext|>
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_penalty
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_penalty took 7.82 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting train
+tinker_cookbook.utils.misc_utils:23 [INFO] train took 9.59 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting compute_kl_sample_train
+tinker_cookbook.utils.misc_utils:23 [INFO] compute_kl_sample_train took 0.02 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://5981dac4-2053-562e-93ed-93480ebf92a8:train:0/weights/000003', 'sampler_path': 'tinker://5981dac4-2053-562e-93ed-93480ebf92a8:train:0/sampler_weights/000003'}
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 7.17 seconds
+tinker_cookbook.utils.ml_log:145 [INFO] Wrote metrics to /Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512/metrics.jsonl
+tinker_cookbook.utils.ml_log:197 [INFO] 
+                     Step 2                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+┃ Metric                         ┃ Value       ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━┩
+│ env/all/ac_tokens_per_turn     │ 1393.656250 │
+│ env/all/by_group/frac_all_bad  │ 0.270833    │
+│ env/all/by_group/frac_all_good │ 0.416667    │
+│ env/all/by_group/frac_mixed    │ 0.312500    │
+│ env/all/correct                │ 0.572917    │
+│ env/all/format                 │ 0.000000    │
+│ env/all/ob_tokens_per_turn     │ 79.791667   │
+│ env/all/reward/total           │ 0.472917    │
+│ env/all/total_ac_tokens        │ 133791      │
+│ env/all/total_episodes         │ 96          │
+│ env/all/total_ob_tokens        │ 7660        │
+│ env/all/total_turns            │ 96          │
+│ env/all/turns_per_episode      │ 1.000000    │
+│ optim/entropy                  │ 0.164835    │
+│ optim/fractal_dissonance       │ 0.052494    │
+│ optim/h_student                │ 0.624714    │
+│ optim/h_teacher                │ 0.599657    │
+│ optim/hurst_n_active_mean      │ 1393.656250 │
+│ optim/hurst_num_windows_mean   │ 9.791667    │
+│ optim/hurst_weight_active_frac │ 0.000000    │
+│ optim/hurst_weight_enabled     │ 0.000000    │
+│ optim/hurst_weight_mean        │ 1.000000    │
+│ optim/hurst_weight_median      │ 1.000000    │
+│ optim/hurst_weight_signal_mad  │ 1.000000    │
+│ optim/hurst_weight_signal_med… │ 0.000000    │
+│ optim/hurst_weight_std         │ 0.000000    │
+│ optim/kl_sample_train_v1       │ 0.000500    │
+│ optim/kl_sample_train_v2       │ 0.000460    │
+│ optim/lr                       │ 0.000100    │
+│ optim/std_s_mean               │ 0.146373    │
+│ optim/std_s_median             │ 0.131810    │
+│ optim/std_t_mean               │ 0.140421    │
+│ optim/std_t_median             │ 0.124253    │
+│ progress/batch                 │ 2           │
+│ progress/done_frac             │ 1.000000    │
+│ teacher_kl                     │ 0.387344    │
+│ teacher_kl/dataset_0           │ 0.387344    │
+│ time/assemble_training_data    │ 0.109248    │
+│ time/compute_kl_penalty        │ 7.820556    │
+│ time/compute_kl_sample_train   │ 0.019250    │
+│ time/sample                    │ 76.286122   │
+│ time/save_checkpoint           │ 7.172721    │
+│ time/total                     │ 101.341743  │
+│ time/train                     │ 9.587001    │
+└────────────────────────────────┴─────────────┘
+tinker_cookbook.checkpoint_utils:260 [INFO] Saved checkpoints: {'state_path': 'tinker://5981dac4-2053-562e-93ed-93480ebf92a8:train:0/weights/final', 'sampler_path': 'tinker://5981dac4-2053-562e-93ed-93480ebf92a8:train:0/sampler_weights/final'}
+tinker_cookbook.distillation.train_on_policy:806 [INFO] Training completed successfully

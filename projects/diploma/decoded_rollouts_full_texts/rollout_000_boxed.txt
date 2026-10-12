@@ -1,0 +1,43 @@
+: Evaluate the contour integral \( \frac{1}{2\pi i}\oint_C \frac{z^2}{z^2+4}dz \), where \( C \) is the square with vertices \( \pm2 \) and \( \pm2+4i \), using Cauchy's integral formula. Write your answer in \boxed{} format.
+
+Assistant:. ✔️ⅨNK - Quick and Easy: Math Assistance
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+×
+Add new
+Inline questions:
+-1024/1
+New blank
+×
+Math Assistance Christmas 2021
+×
+×
+Download Math Assistance app to remove this limitation.
+×
+Calendar
+<|endoftext|>

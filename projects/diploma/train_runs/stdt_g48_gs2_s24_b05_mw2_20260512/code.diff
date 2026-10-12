@@ -1,0 +1,743 @@
+### repo: /Users/dudberoll/prj/diploma/tinker-cookbook @ 631aa1884e915b069ec8f4ddf006c5fa59875802
+modules: tinker_cookbook
+-- repo-wide (vs HEAD, staged+unstaged) --
+diff --git a/AGENTS.md b/AGENTS.md
+deleted file mode 100644
+index 5f8af93..0000000
+--- a/AGENTS.md
++++ /dev/null
+@@ -1,133 +0,0 @@
+-# Tinker Cookbook Agent Guide
+-
+-Quick reference for agents working on `tinker-cookbook`. Full documentation is in `docs/`.
+-
+-`tinker-cookbook` is a client library with training and eval code built on the Tinker service (hosted by Thinking Machines Lab) and the Tinker SDK (a separate repo with just the API). You author training/eval loops that run on a CPU machine; Tinker executes the heavy GPU work.
+-
+-**Start here:** `docs/training-sampling.mdx` - Complete walkthrough of training and sampling basics.
+-
+-## Documentation Map (`docs/`)
+-
+-**API Fundamentals:**
+-- `index.mdx` - Tinker overview, division of responsibilities
+-- `install.mdx` - Installation, API key setup
+-- `training-sampling.mdx` - **Starter guide**: data prep, forward_backward, sampling, vision inputs
+-- `losses.mdx` - Loss functions (cross_entropy, importance_sampling, ppo, cispo, dro, forward_backward_custom)
+-- `save-load.mdx` - Checkpointing (save_weights_for_sampler vs save_state)
+-- `async.mdx` - Sync/async APIs, futures, overlapping requests
+-- `model-lineup.mdx` - Available models
+-- `under-the-hood.mdx` - Clock cycles, worker pools
+-
+-**API Reference (`api-reference/`):**
+-- `types.md` - **All API types** (Datum, ModelInput, TensorData, SamplingParams, etc.)
+-- `trainingclient.md`, `samplingclient.md`, `serviceclient.md`, `restclient.md` - Client APIs
+-
+-**Supervised Learning (`supervised-learning/`):**
+-- `../supervised-learning.mdx` - SL overview
+-- `sl-basic.mdx` - First SL run
+-- `sl-hyperparams.mdx` - LR formula, batch size
+-- `sl-loop.mdx` - Minimal training loop
+-- `prompt-distillation.mdx` - Distilling prompts
+-- `sweep-case-study.mdx` - Hyperparameter sweeps
+-
+-**Reinforcement Learning (`rl/`):**
+-- `../rl.mdx` - RL overview (RLVR, RLHF)
+-- `rl-basic.mdx` - First RL run
+-- `rl-envs.mdx` - Custom Env, EnvGroupBuilder, RLDataset
+-- `rl-loops.mdx` - Minimal RL loop
+-- `rl-hyperparams.mdx` - batch_size vs group_size, async training
+-- `sequence-extension.mdx` - Multi-turn RL, KV-cache
+-
+-**Preferences (`preferences/`):**
+-- `../preferences.mdx` - DPO vs RLHF overview
+-- `dpo-guide.mdx` - DPO training
+-- `rlhf-example.mdx` - RLHF pipeline
+-
+-**Other:**
+-- `rendering.mdx` - Renderers (bridge between chat-style data and token sequences), vision inputs, TrainOnWhat
+-- `completers.mdx` - TokenCompleter vs MessageCompleter
+-- `evals.mdx` - Inline evals, Inspect AI, custom evaluators
+-- `lora-primer.mdx` - LoRA background
+-- `download-weights.mdx` / `publish-weights.mdx` - Weight export
+-
+----
+-
+-## Composing Types
+-
+-Agents often struggle with the nested type hierarchy. Key resources:
+-
+-**Reference:** `docs/api-reference/types.md` documents all API types.
+-
+-**Core types:**
+-- `Datum` = `model_input` (ModelInput) + `loss_fn_inputs` (dict of TensorData)
+-- `ModelInput` = list of chunks (EncodedTextChunk, ImageChunk)
+-- `TensorData` = wrapper for numpy/torch arrays with shape info
+-
+-**Helper functions** (use these instead of manual construction):
+-- `datum_from_model_input_weights(model_input, weights, max_length)` - SL datum creation (`supervised/common.py`)
+-- `conversation_to_datum(messages, renderer, max_length, train_on_what)` - Full pipeline (`supervised/data.py`)
+-- `renderer.build_supervised_example(messages)` - Returns (ModelInput, weights)
+-- `ModelInput.from_ints(tokens)` - Create from token list
+-- `TensorData.from_numpy(arr)` / `TensorData.from_torch(tensor)` - Wrap arrays
+-
+----
+-
+-## Architecture
+-
+-**Builder pattern:** Config objects are `chz` dataclasses (SupervisedDatasetBuilder, RLDatasetBuilder, EnvGroupBuilder). They expose `.build()`/`__call__()` returning runtime objects.
+-
+-**Key code locations:**
+-- SL: `tinker_cookbook/supervised/train.py`
+-- RL: `tinker_cookbook/rl/train.py`
+-- DPO: `tinker_cookbook/preference/train_dpo.py`
+-- Renderers: `tinker_cookbook/renderers/`
+-- Completers: `tinker_cookbook/completers.py`
+-- RL types: `tinker_cookbook/rl/types.py`
+-- Recipes: `tinker_cookbook/recipes/`
+-
+----
+-
+-## Conventions
+-
+-**Subscript suffixes** for tensor names: `_P` (problems), `_G` (groups), `_T` (tokens), `_D` (datums). Example: `tokens_P_G_T[p][g][t]`
+-
+-**Code style:**
+-- Explicit typing; avoid `Any` / `type: ignore`
+-- Use `safezip`, `timed`, `scope` helpers
+-- `@chz.chz` decorator for config serialization
+-- `ml_log.log_metrics` for metrics; `logtree` for transcripts
+-
+-**Env lifecycle:** `Env` objects are single-use (no reset). Create via `EnvGroupBuilder`.
+-
+----
+-
+-## Common Pitfalls
+-
+-1. **LoRA LR:** Use `hyperparam_utils.get_lr(model_name)` - LoRA needs ~10x higher LR than full fine-tuning.
+-
+-2. **Renderer mismatch:** Match `renderer_name` to model family (`llama3`, `qwen3`, `role_colon`).
+-
+-3. **Async gaps:** Submit `forward_backward_async` and `optim_step_async` back-to-back before awaiting.
+-
+-4. **Sampler desync:** Create a **new** sampling client after saving weights.
+-
+-5. **Type construction:** Use helper functions, not manual dict construction. See `supervised/data.py` and `supervised/common.py`.
+-
+-6. **Group semantics:** RL advantages are centered within each group.
+-
+-7. **DPO:** Start with `dpo_beta=0.1`, LR~1e-5.
+-
+----
+-
+-## Testing
+-
+-```bash
+-# Unit tests (no API needed)
+-pytest tinker_cookbook/tests/test_renderers.py
+-pytest tinker_cookbook/tests/test_utils.py
+-
+-# Smoke tests (requires API key + network)
+-pytest tinker_cookbook/tests/smoke_tests.py
+-```
+-
+-For debugging, shrink workloads via `n_batches`, `batch_size`, `group_size` in dataset builders.
+diff --git a/tinker_cookbook/distillation/train_on_policy.py b/tinker_cookbook/distillation/train_on_policy.py
+index 50a26ce..78422ec 100644
+--- a/tinker_cookbook/distillation/train_on_policy.py
++++ b/tinker_cookbook/distillation/train_on_policy.py
+@@ -10,8 +10,10 @@ import time
+ from typing import Any, Dict, List, Sequence, cast
+ 
+ import chz
++import numpy as np
+ import tinker
+ import torch
++from scipy.stats import linregress
+ 
+ from tinker.types import LossFnType
+ 
+@@ -51,9 +53,19 @@ async def incorporate_kl_penalty(
+     data_D: List[tinker.Datum],
+     teacher_clients_D: List[tinker.SamplingClient],
+     dataset_indices_D: List[int],
++    current_step: int,
+     kl_penalty_coef: float,
+     kl_discount_factor: float,
+-) -> Dict[str, float]:
++    hurst_weight_mode: str,
++    hurst_window_size: int,
++    hurst_min_windows: int,
++    hurst_weight_beta: float,
++    hurst_weight_min: float,
++    hurst_weight_max: float,
++    hurst_weight_eps: float,
++    hurst_weight_warmup_steps: int,
++    hurst_weight_apply_to: str,
++) -> tuple[Dict[str, float], List[dict]]:
+     """
+     Compute reverse KL between the student (log p) and the teacher model (log q), computed as
+     log p - log q. We then adjust the advantages in-place as the negative reverse KL.
+@@ -62,6 +74,7 @@ async def incorporate_kl_penalty(
+         data_D: List of datums to compute KL for
+         teacher_clients_D: List of teacher sampling clients, one per datum
+         dataset_indices_D: List of dataset indices, one per datum
++        current_step: Zero-based training step
+         kl_penalty_coef: Coefficient for KL penalty
+         kl_discount_factor: Discount factor for future KL
+     """
+@@ -90,21 +103,95 @@ async def incorporate_kl_penalty(
+             teacher_logprobs_D, sampled_logprobs_D, float_masks
+         )
+     ]
++    if hurst_weight_mode not in {"none", "std_t", "std_s"}:
++        raise ValueError(f"Unsupported hurst_weight_mode: {hurst_weight_mode}")
++    if hurst_weight_apply_to != "kl_only":
++        raise ValueError(f"Unsupported hurst_weight_apply_to: {hurst_weight_apply_to}")
++
+     # Track per-dataset KL for logging
+     # dataset_idx -> (sum of KL, sum of mask)
+     per_dataset_kl: Dict[int, tuple[float, float]] = {}
++    telemetry_data = []
++
++    # Fractal metrics tracking
++    h_student_list = []
++    h_teacher_list = []
++    std_student_list = []
++    std_teacher_list = []
++    num_hurst_windows_list = []
++
++    for i, _datum in enumerate(data_D):
++        active = float_masks[i] > 0
++
++        lp_s = sampled_logprobs_D[i][active]
++        lp_t = torch.tensor(teacher_logprobs_D[i][1:])[active]
++
++        hs = calculate_hurst_efficient(lp_s)
++        ht = calculate_hurst_efficient(lp_t)
++        h_student_list.append(hs)
++        h_teacher_list.append(ht)
++
++        _, std_s, num_windows_s = calculate_windowed_hurst_stats(lp_s, hurst_window_size)
++        _, std_t, num_windows_t = calculate_windowed_hurst_stats(lp_t, hurst_window_size)
++        std_student_list.append(std_s)
++        std_teacher_list.append(std_t)
++        num_hurst_windows_list.append(min(num_windows_s, num_windows_t))
++
++    weight_signals = (
++        std_teacher_list
++        if hurst_weight_mode == "std_t"
++        else std_student_list
++        if hurst_weight_mode == "std_s"
++        else [0.0] * len(data_D)
++    )
++    weighting_enabled = (
++        hurst_weight_mode != "none" and current_step >= hurst_weight_warmup_steps
++    )
++    hurst_weights, signal_median, signal_mad, active_weight_count = compute_hurst_weights(
++        weight_signals,
++        num_hurst_windows_list,
++        enabled=weighting_enabled,
++        min_windows=hurst_min_windows,
++        beta=hurst_weight_beta,
++        weight_min=hurst_weight_min,
++        weight_max=hurst_weight_max,
++        eps=hurst_weight_eps,
++    )
+ 
+     for i, datum in enumerate(data_D):
+-        # The advantage is the negative reverse KL. We can optionally apply a discount factor.
+-        kl_advantages = -kl_penalty_coef * float_masks[i] * reverse_kl[i]
++        mask = float_masks[i]
++
++        # Resonance reward disabled for this experiment.
++        # Keep the variable to avoid changing the downstream training flow.
++        resonance_reward = 0.0
++
++        # The advantage is the negative reverse KL, optionally reweighted by Hurst variability.
++        kl_advantages = -kl_penalty_coef * mask * reverse_kl[i]
+         if kl_discount_factor > 0:
+             kl_advantages = torch.tensor(
+                 discounted_future_sum_vectorized(kl_advantages.numpy(), kl_discount_factor)
+             )
++        weighted_kl_advantages = kl_advantages * hurst_weights[i]
+         datum.loss_fn_inputs["advantages"] = tinker.TensorData.from_torch(
+-            datum.loss_fn_inputs["advantages"].to_torch() + kl_advantages
++            datum.loss_fn_inputs["advantages"].to_torch()
++            + weighted_kl_advantages
++            + resonance_reward * mask
+         )
+ 
++        telemetry_data.append({
++            "logp_student": sampled_logprobs_D[i].detach().cpu().numpy().tolist(),
++            "logp_teacher": teacher_logprobs_D[i][1:],  # [1:] for alignment with rollout
++            "step_kl": reverse_kl[i].detach().cpu().numpy().tolist(),
++            "advantages": datum.loss_fn_inputs["advantages"].to_torch().detach().cpu().numpy().tolist(),
++            "h_student": h_student_list[i],
++            "h_teacher": h_teacher_list[i],
++            "std_s": std_student_list[i],
++            "std_t": std_teacher_list[i],
++            "num_hurst_windows": num_hurst_windows_list[i],
++            "hurst_weight": hurst_weights[i],
++            "hurst_weight_signal": weight_signals[i],
++        })
++
+         # Accumulate per-dataset KL
+         dataset_idx = dataset_indices_D[i]
+         kl_sum = reverse_kl[i].sum().item()
+@@ -120,12 +207,31 @@ async def incorporate_kl_penalty(
+     )
+ 
+     # Compute per-dataset metrics
+-    metrics = {"teacher_kl": float(avg_logp_diff)}
++    metrics = {
++        "teacher_kl": float(avg_logp_diff),
++        "optim/h_student": float(np.mean(h_student_list)),
++        "optim/h_teacher": float(np.mean(h_teacher_list)),
++        "optim/fractal_dissonance": float(np.mean([abs(s-t) for s, t in zip(h_student_list, h_teacher_list)])),
++        "optim/std_s_mean": float(np.mean(std_student_list)),
++        "optim/std_s_median": float(np.median(std_student_list)),
++        "optim/std_t_mean": float(np.mean(std_teacher_list)),
++        "optim/std_t_median": float(np.median(std_teacher_list)),
++        "optim/hurst_num_windows_mean": float(np.mean(num_hurst_windows_list)),
++        "optim/hurst_weight_enabled": float(weighting_enabled),
++        "optim/hurst_weight_mean": float(np.mean(hurst_weights)),
++        "optim/hurst_weight_median": float(np.median(hurst_weights)),
++        "optim/hurst_weight_std": float(np.std(hurst_weights)),
++        "optim/hurst_weight_signal_median": signal_median,
++        "optim/hurst_weight_signal_mad": signal_mad,
++        "optim/hurst_weight_active_frac": float(active_weight_count / len(hurst_weights))
++        if hurst_weights
++        else 0.0,
++    }
+     for dataset_idx, (kl_sum, mask_sum) in per_dataset_kl.items():
+         if mask_sum > 0:
+             metrics[f"teacher_kl/dataset_{dataset_idx}"] = float(kl_sum / mask_sum)
+ 
+-    return metrics
++    return metrics, telemetry_data
+ 
+ 
+ @chz.chz
+@@ -165,6 +271,89 @@ class Config:
+ 
+     # Maximum number of training steps. If None, train on the full dataset.
+     max_step: int | None = None
++    
++    # Fractal RL parameters (FDRL)
++    fractal_alpha: float = 0.0 # Coefficient for fractal regularization
++    hurst_weight_mode: str = "none"
++    hurst_window_size: int = 512
++    hurst_min_windows: int = 6
++    hurst_weight_beta: float = 0.25
++    hurst_weight_min: float = 0.9
++    hurst_weight_max: float = 1.1
++    hurst_weight_eps: float = 1e-6
++    hurst_weight_warmup_steps: int = 10
++    hurst_weight_apply_to: str = "kl_only"
++
++
++def calculate_hurst_efficient(logprobs: torch.Tensor) -> float:
++    """Fast estimation of Hurst exponent for online training."""
++    if len(logprobs) < 20: return 0.5
++    data = logprobs.detach().cpu().numpy()
++    N = len(data)
++    y = np.cumsum(data - np.mean(data))
++    scales = np.unique(np.logspace(np.log10(4), np.log10(N // 4), num=8).astype(int))
++    if len(scales) < 2: return 0.5
++    fluctuations = []
++    for s in scales:
++        num_windows = N // s
++        rms = np.sqrt(np.mean([np.var(y[i*s:(i+1)*s]) for i in range(num_windows)]))
++        fluctuations.append(rms)
++    H, _, _, _, _ = linregress(np.log(scales), np.log(fluctuations))
++    return float(np.clip(H, 0.0, 1.0))
++
++
++def calculate_windowed_hurst_stats(
++    logprobs: torch.Tensor, window_size: int
++) -> tuple[list[float], float, int]:
++    """Compute Hurst values over full windows of the active sequence."""
++    if window_size <= 0:
++        raise ValueError(f"window_size must be positive, got {window_size}")
++
++    num_windows = len(logprobs) // window_size
++    if num_windows <= 0:
++        return [], 0.0, 0
++
++    hurst_profile = [
++        calculate_hurst_efficient(logprobs[i * window_size : (i + 1) * window_size])
++        for i in range(num_windows)
++    ]
++    return hurst_profile, float(np.std(hurst_profile)), num_windows
++
++
++def compute_hurst_weights(
++    signals: list[float],
++    num_windows_list: list[int],
++    enabled: bool,
++    min_windows: int,
++    beta: float,
++    weight_min: float,
++    weight_max: float,
++    eps: float,
++) -> tuple[list[float], float, float, int]:
++    """Convert a batch of trajectory-level signals into bounded weighting coefficients."""
++    weights = [1.0] * len(signals)
++    if not enabled or not signals:
++        return weights, 0.0, 1.0, 0
++
++    eligible_indices = [
++        i
++        for i, (signal, num_windows) in enumerate(zip(signals, num_windows_list))
++        if num_windows >= min_windows and np.isfinite(signal)
++    ]
++    if not eligible_indices:
++        return weights, 0.0, 1.0, 0
++
++    eligible_values = np.array([signals[i] for i in eligible_indices], dtype=float)
++    signal_median = float(np.median(eligible_values))
++    signal_mad = float(np.median(np.abs(eligible_values - signal_median)))
++    if (not np.isfinite(signal_mad)) or signal_mad < eps:
++        signal_mad = 1.0
++
++    for i in eligible_indices:
++        z_score = (signals[i] - signal_median) / (signal_mad + eps)
++        weights[i] = float(np.clip(1.0 + beta * np.tanh(z_score), weight_min, weight_max))
++
++    return weights, signal_median, signal_mad, len(eligible_indices)
+ 
+ 
+ @scope
+@@ -174,9 +363,20 @@ async def prepare_minibatch(
+     tokenizer: Tokenizer,
+     dataset_indices_P: List[int],
+     teacher_clients: List[tinker.SamplingClient],
++    current_step: int,
+     kl_penalty_coef: float,
+     kl_discount_factor: float,
+-) -> tuple[list[tinker.Datum], dict[str, Any]]:
++    fractal_alpha: float = 0.0,
++    hurst_weight_mode: str = "none",
++    hurst_window_size: int = 512,
++    hurst_min_windows: int = 6,
++    hurst_weight_beta: float = 0.25,
++    hurst_weight_min: float = 0.9,
++    hurst_weight_max: float = 1.1,
++    hurst_weight_eps: float = 1e-6,
++    hurst_weight_warmup_steps: int = 10,
++    hurst_weight_apply_to: str = "kl_only",
++) -> tuple[list[tinker.Datum], dict[str, Any], list[dict]]:
+     """Converts the trajectories into a minibatch, and provides metrics about the minibatch"""
+ 
+     # Compute trajectory metrics
+@@ -197,29 +397,81 @@ async def prepare_minibatch(
+             logger.info(colorize_example(datum, tokenizer, key="mask"))
+             printed_datasets.add(dataset_idx)
+ 
++    # FDRL: Apply Fractal Regularization
++    if fractal_alpha != 0:
++        hurst_values = []
++        for i, datum in enumerate(data_D):
++            logprobs = datum.loss_fn_inputs["logprobs"].to_torch()
++            mask = datum.loss_fn_inputs["mask"].to_torch()
++            active_logprobs = logprobs[mask > 0]
++            
++            H = calculate_hurst_efficient(active_logprobs)
++            hurst_values.append(H)
++            
++            # Add fractal reward to advantages
++            fractal_reward = fractal_alpha * H
++            datum.loss_fn_inputs["advantages"] = tinker.TensorData.from_torch(
++                datum.loss_fn_inputs["advantages"].to_torch() + fractal_reward
++            )
++        metrics["optim/avg_hurst_online"] = float(np.mean(hurst_values))
++
+     # Incorporate KL penalty if configured
++    telemetry_list = []
++    
++    # Extract individual rewards for each datum in data_D
++    individual_rewards_D = []
++    # Pre-compute total rewards for each group
++    total_rewards_P = [group.get_total_rewards() for group in trajectory_groups_P]
++    
++    for metadata in metadata_D:
++        group_idx = metadata["group_idx"]
++        traj_idx = metadata["traj_idx"]
++        # Use the pre-computed total reward for this trajectory
++        reward = total_rewards_P[group_idx][traj_idx]
++        individual_rewards_D.append(float(reward))
++
+     if kl_penalty_coef > 0:
+         with timed("compute_kl_penalty", metrics):
+-            # Map each datum to its teacher sampling client and dataset index using metadata
+-            #   - metadata_D contains group_idx which indexes into trajectory_groups_P
+-            #   - dataset_indices_P[group_idx] gives us the dataset index
+-            #   - teacher_clients[dataset_idx] gives us the teacher
+             teacher_clients_D = [
+                 teacher_clients[dataset_indices_P[metadata["group_idx"]]] for metadata in metadata_D
+             ]
+             dataset_indices_D = [
+                 dataset_indices_P[metadata["group_idx"]] for metadata in metadata_D
+             ]
+-            kl_penalty_metrics = await incorporate_kl_penalty(
++            kl_penalty_metrics, telemetry_list = await incorporate_kl_penalty(
+                 data_D,
+                 teacher_clients_D,
+                 dataset_indices_D,
++                current_step,
+                 kl_penalty_coef,
+                 kl_discount_factor,
++                hurst_weight_mode,
++                hurst_window_size,
++                hurst_min_windows,
++                hurst_weight_beta,
++                hurst_weight_min,
++                hurst_weight_max,
++                hurst_weight_eps,
++                hurst_weight_warmup_steps,
++                hurst_weight_apply_to,
+             )
+         metrics.update(kl_penalty_metrics)
+-
+-    return data_D, metrics
++    else:
++        # If no KL penalty, create empty/basic telemetry list
++        for i, datum in enumerate(data_D):
++            telemetry_list.append({
++                "logp_student": datum.loss_fn_inputs["logprobs"].to_torch().detach().cpu().numpy().tolist(),
++                "logp_teacher": [], # No teacher logprobs calculated
++                "step_kl": [],
++                "advantages": datum.loss_fn_inputs["advantages"].to_torch().detach().cpu().numpy().tolist(),
++            })
++        
++    # Add individual rewards to telemetry_list
++    for i, reward in enumerate(individual_rewards_D):
++        if i < len(telemetry_list):
++            telemetry_list[i]["individual_reward"] = reward
++        
++    return data_D, metrics, telemetry_list
+ 
+ 
+ @scope
+@@ -237,14 +489,25 @@ async def do_train_step_and_get_sampling_client(
+     update_scope_context({"step": i_batch})
+ 
+     metrics = {}
+-    data_D, prepare_minibatch_metrics = await prepare_minibatch(
++    data_D, prepare_minibatch_metrics, telemetry_list = await prepare_minibatch(
+         env_group_builders_P,
+         trajectory_groups_P,
+         tokenizer,
+         dataset_indices_P,
+         teacher_clients,
++        current_step=i_batch,
+         kl_penalty_coef=cfg.kl_penalty_coef,
+         kl_discount_factor=cfg.kl_discount_factor,
++        fractal_alpha=cfg.fractal_alpha,
++        hurst_weight_mode=cfg.hurst_weight_mode,
++        hurst_window_size=cfg.hurst_window_size,
++        hurst_min_windows=cfg.hurst_min_windows,
++        hurst_weight_beta=cfg.hurst_weight_beta,
++        hurst_weight_min=cfg.hurst_weight_min,
++        hurst_weight_max=cfg.hurst_weight_max,
++        hurst_weight_eps=cfg.hurst_weight_eps,
++        hurst_weight_warmup_steps=cfg.hurst_weight_warmup_steps,
++        hurst_weight_apply_to=cfg.hurst_weight_apply_to,
+     )
+     metrics.update(prepare_minibatch_metrics)
+ 
+@@ -271,6 +534,35 @@ async def do_train_step_and_get_sampling_client(
+     )
+     metrics.update(full_batch_metrics)
+ 
++    # Export telemetry
++    if telemetry_list:
++        import json
++        log_file = os.path.join(cfg.log_path, "telemetry_rollouts.jsonl")
++        
++        # Get common metrics for this step
++        step_entropy = metrics.get("optim/entropy", 0.0)
++        step_reward = metrics.get("env/all/reward/total", 0.0)
++        
++        with open(log_file, "a") as f:
++            for datum, tel in zip(data_D, telemetry_list):
++                # datum.loss_fn_inputs values are typically tinker.TensorData
++                # .data attribute might already be a list
++                tokens = datum.loss_fn_inputs["target_tokens"].data
++                if hasattr(tokens, "tolist"):
++                    tokens = tokens.tolist()
++                
++                mask = datum.loss_fn_inputs["mask"].data
++                if hasattr(mask, "tolist"):
++                    mask = mask.tolist()
++
++                record = {
++                    "tokens": tokens,
++                    "mask": mask,
++                    "step_entropy": step_entropy,
++                    "step_reward": step_reward,
++                    **tel
++                }
++                f.write(json.dumps(record) + "\n")
+     return sampling_client, metrics
+ 
+ 
+@@ -358,6 +650,19 @@ async def main(
+     cfg: Config,
+ ):
+     """Main training loop for on-policy distillation."""
++    if cfg.hurst_weight_mode not in {"none", "std_t", "std_s"}:
++        raise ValueError(f"Unsupported hurst_weight_mode: {cfg.hurst_weight_mode}")
++    if cfg.hurst_weight_apply_to != "kl_only":
++        raise ValueError(f"Unsupported hurst_weight_apply_to: {cfg.hurst_weight_apply_to}")
++    if cfg.hurst_window_size <= 0:
++        raise ValueError(f"hurst_window_size must be positive, got {cfg.hurst_window_size}")
++    if cfg.hurst_min_windows < 1:
++        raise ValueError(f"hurst_min_windows must be >= 1, got {cfg.hurst_min_windows}")
++    if cfg.hurst_weight_min <= 0 or cfg.hurst_weight_max <= 0:
++        raise ValueError("hurst_weight_min and hurst_weight_max must be positive")
++    if cfg.hurst_weight_min > cfg.hurst_weight_max:
++        raise ValueError("hurst_weight_min must be <= hurst_weight_max")
++
+     ml_logger = ml_log.setup_logging(
+         log_dir=cfg.log_path,
+         wandb_project=cfg.wandb_project,
+diff --git a/tinker_cookbook/recipes/distillation/on_policy_distillation.py b/tinker_cookbook/recipes/distillation/on_policy_distillation.py
+index 0742c7a..dd8485b 100644
+--- a/tinker_cookbook/recipes/distillation/on_policy_distillation.py
++++ b/tinker_cookbook/recipes/distillation/on_policy_distillation.py
+@@ -24,6 +24,8 @@ Example usage:
+         lora_rank=128 \
+         wandb_project=cookbook_distillation
+ """
++from dotenv import load_dotenv
++load_dotenv()
+ 
+ import asyncio
+ import logging
+@@ -55,7 +57,7 @@ class CLIConfig:
+     load_checkpoint_path: str | None = None  # Student checkpoint
+ 
+     # Teacher configuration
+-    teacher_model: str = "Qwen/Qwen3-8B"
++    teacher_model: str = "Qwen/Qwen3-32B"
+     teacher_checkpoint: str | None = None
+ 
+     # Dataset configuration
+@@ -84,9 +86,22 @@ class CLIConfig:
+     wandb_name: str | None = None
+     compute_post_kl: bool = False
+ 
++    # Fractal RL parameters
++    fractal_alpha: float = 0.0  # Coefficient for fractal regularization (FDRL)
++    hurst_weight_mode: str = "none"
++    hurst_window_size: int = 512
++    hurst_min_windows: int = 6
++    hurst_weight_beta: float = 0.25
++    hurst_weight_min: float = 0.9
++    hurst_weight_max: float = 1.1
++    hurst_weight_eps: float = 1e-6
++    hurst_weight_warmup_steps: int = 10
++    hurst_weight_apply_to: str = "kl_only"
++
+     # Evaluation and checkpointing
+-    eval_every: int = 20
+-    save_every: int = 20
++    eval_every: int = 10
++    save_every: int = 10
++    max_step: int | None = None  # Maximum number of training steps
+ 
+     # Service configuration
+     base_url: str | None = None
+@@ -110,10 +125,19 @@ async def cli_main(cli_config: CLIConfig):
+         log_path = cli_config.log_path
+     else:
+         model_name = cli_config.model_name.replace("/", "-")
++        temperature_suffix = f"-t{cli_config.temperature}" if cli_config.temperature != 1.0 else ""
++        hurst_suffix = ""
++        if cli_config.hurst_weight_mode != "none":
++            hurst_suffix = (
++                f"-{cli_config.hurst_weight_mode}"
++                f"-w{cli_config.hurst_window_size}"
++                f"-b{cli_config.hurst_weight_beta}"
++            )
+         run_name = (
+             f"distill-{cli_config.dataset}-{model_name}-"
+             f"{cli_config.lora_rank}rank-{cli_config.learning_rate}lr-"
+-            f"{cli_config.groups_per_batch}batch-{datetime.now().strftime('%Y-%m-%d-%H-%M')}"
++            f"{cli_config.groups_per_batch}batch{temperature_suffix}{hurst_suffix}-"
++            f"{datetime.now().strftime('%Y-%m-%d-%H-%M')}"
+         )
+         log_path = os.path.expanduser(f"~/tinker-examples/distillation/{run_name}")
+ 
+@@ -124,13 +148,23 @@ async def cli_main(cli_config: CLIConfig):
+         wandb_name = os.path.basename(log_path)
+ 
+     # Create dataset builder
+-    dataset_builder = PromptOnlyDatasetBuilder(
+-        dataset_name=cli_config.dataset,
+-        groups_per_batch=cli_config.groups_per_batch,
+-        group_size=cli_config.group_size,
+-        model_name_for_tokenizer=cli_config.model_name,
+-        renderer_name=renderer_name,
+-    )
++    if cli_config.dataset == "deepmath":
++        from tinker_cookbook.recipes.math_rl.math_env import get_math_dataset_builder
++        dataset_builder = get_math_dataset_builder(
++            dataset_name="deepmath",
++            batch_size=cli_config.groups_per_batch,
++            model_name_for_tokenizer=cli_config.model_name,
++            renderer_name=renderer_name,
++            group_size=cli_config.group_size,
++        )
++    else:
++        dataset_builder = PromptOnlyDatasetBuilder(
++            dataset_name=cli_config.dataset,
++            groups_per_batch=cli_config.groups_per_batch,
++            group_size=cli_config.group_size,
++            model_name_for_tokenizer=cli_config.model_name,
++            renderer_name=renderer_name,
++        )
+ 
+     # Create teacher config
+     teacher_config = TeacherConfig(
+@@ -153,6 +187,7 @@ async def cli_main(cli_config: CLIConfig):
+         renderer_name=renderer_name,
+         lora_rank=cli_config.lora_rank,
+         max_tokens=cli_config.max_tokens,
++        temperature=cli_config.temperature,
+         kl_penalty_coef=cli_config.kl_penalty_coef,
+         kl_discount_factor=cli_config.kl_discount_factor,
+         num_substeps=cli_config.num_substeps,
+@@ -166,6 +201,17 @@ async def cli_main(cli_config: CLIConfig):
+         compute_post_kl=cli_config.compute_post_kl,
+         eval_every=cli_config.eval_every,
+         save_every=cli_config.save_every,
++        max_step=cli_config.max_step,
++        fractal_alpha=cli_config.fractal_alpha,
++        hurst_weight_mode=cli_config.hurst_weight_mode,
++        hurst_window_size=cli_config.hurst_window_size,
++        hurst_min_windows=cli_config.hurst_min_windows,
++        hurst_weight_beta=cli_config.hurst_weight_beta,
++        hurst_weight_min=cli_config.hurst_weight_min,
++        hurst_weight_max=cli_config.hurst_weight_max,
++        hurst_weight_eps=cli_config.hurst_weight_eps,
++        hurst_weight_warmup_steps=cli_config.hurst_weight_warmup_steps,
++        hurst_weight_apply_to=cli_config.hurst_weight_apply_to,
+     )
+ 
+     cli_utils.check_log_dir(log_path, behavior_if_exists=cli_config.behavior_if_log_dir_exists)
+diff --git a/tinker_cookbook/scripts/merge_tinker_adapter_to_hf_model.py b/tinker_cookbook/scripts/merge_tinker_adapter_to_hf_model.py
+index c902388..1ad9bc6 100644
+--- a/tinker_cookbook/scripts/merge_tinker_adapter_to_hf_model.py
++++ b/tinker_cookbook/scripts/merge_tinker_adapter_to_hf_model.py
+@@ -31,7 +31,9 @@ def load_model(model_path: str):
+     config = get_model_config(model_path)
+     auto_cls = AutoModelForImageTextToText if "vision_config" in config else AutoModelForCausalLM
+ 
+-    return auto_cls.from_pretrained(model_path, device_map="auto", dtype=torch.bfloat16)
++    # Убираем device_map="auto", чтобы модель полностью загрузилась в RAM (CPU).
++    # Это позволит избежать ошибок с meta-тензорами при сохранении.
++    return auto_cls.from_pretrained(model_path, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True)
+ 
+ 
+ def load_adapter_weights(adapter_path: str):

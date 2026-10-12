@@ -1,0 +1,19 @@
+{
+  "model_name": "Qwen/Qwen3-8B-Base",
+  "renderer_name": "role_colon",
+  "subset_path": "/Users/dudberoll/prj/diploma/eval_subsets/deepmath_eval_512_seed0.jsonl",
+  "subset_size": 512,
+  "seed": 0,
+  "max_tokens": 4096,
+  "temperature": 1.0,
+  "concurrency": 8,
+  "correct_mean": 0.458984375,
+  "format_mean": 0.0,
+  "reward_mean": 0.358984375,
+  "parse_success_mean": 0.0,
+  "boxed_rate": 0.90625,
+  "num_response_tokens_mean": 1157.86328125,
+  "num_response_tokens_median": 759.0,
+  "maxed_out_rate": 0.0546875,
+  "results_path": "/Users/dudberoll/prj/diploma/eval_runs/qwen3_8b_base_deepmath_512_seed0/results.jsonl"
+}

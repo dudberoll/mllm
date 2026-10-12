@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/dudberoll/tinker-examples/distillation/)",
+      "Bash(python3 -c \"import json,sys; d=json.loads\\(sys.stdin.readline\\(\\)\\); print\\(list\\(d.keys\\(\\)\\)\\); print\\({k: \\(type\\(v\\).__name__, len\\(v\\) if isinstance\\(v,list\\) else v\\) for k,v in d.items\\(\\)}\\)\")",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}

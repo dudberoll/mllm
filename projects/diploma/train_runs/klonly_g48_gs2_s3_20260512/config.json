@@ -1,0 +1,51 @@
+{
+  "learning_rate": 0.0001,
+  "dataset_configs": [
+    {
+      "dataset_builder": {
+        "batch_size": 48,
+        "model_name_for_tokenizer": "Qwen/Qwen3-8B-Base",
+        "renderer_name": "role_colon",
+        "group_size": 2,
+        "seed": 0
+      },
+      "teacher_config": {
+        "base_model": "Qwen/Qwen3-32B",
+        "load_checkpoint_path": null
+      },
+      "groups_per_batch": 48
+    }
+  ],
+  "model_name": "Qwen/Qwen3-8B-Base",
+  "renderer_name": "role_colon",
+  "max_tokens": 4096,
+  "temperature": 1.0,
+  "compute_post_kl": false,
+  "evaluator_builders": [],
+  "lora_rank": 128,
+  "kl_penalty_coef": 1.0,
+  "kl_discount_factor": 0.0,
+  "loss_fn": "importance_sampling",
+  "loss_fn_config": null,
+  "num_substeps": 1,
+  "wandb_project": null,
+  "wandb_name": "klonly_g48_gs2_s3_20260512",
+  "log_path": "/Users/dudberoll/prj/diploma/train_runs/klonly_g48_gs2_s3_20260512",
+  "base_url": null,
+  "enable_trace": false,
+  "eval_every": 0,
+  "save_every": 3,
+  "load_checkpoint_path": null,
+  "max_step": 3,
+  "fractal_alpha": 0.0,
+  "hurst_weight_mode": "none",
+  "hurst_num_windows": 10,
+  "hurst_n_active_min": 1024,
+  "hurst_n_active_max": 1536,
+  "hurst_weight_beta": 0.25,
+  "hurst_weight_min": 0.9,
+  "hurst_weight_max": 1.1,
+  "hurst_weight_eps": 1e-06,
+  "hurst_weight_warmup_steps": 5,
+  "hurst_weight_apply_to": "kl_only"
+}
